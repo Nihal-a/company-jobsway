@@ -1,6 +1,7 @@
 import {QueryClientProvider , QueryClient} from "react-query"
 import {BrowserRouter as Router , Route , Switch} from "react-router-dom"
 import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
             <Login/>
           </Route>
           <Route exact path="/register">
-            <Dashboard/>
+            <Register />
           </Route>
         </Switch>
       </Router>
