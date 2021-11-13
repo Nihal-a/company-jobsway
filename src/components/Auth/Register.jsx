@@ -24,6 +24,9 @@ const Register = () => {
 
   return (
     <div>
+    <div className="container m-auto mt-4">
+    <Link className="font-semibold text-3xl">JobsWay.</Link>
+    </div>
       <div className="flex flex-col items-center py-8">
         <div className="container max-w-screen-md px-5 w-full">
           <h3 className="text-3xl font-semibold mt-8 text-center">
