@@ -6,19 +6,17 @@ import swal from 'sweetalert'
 
 
 export const RegisterCompany = () => {
-
     const history = useHistory()
     const queryClient = useQueryClient()
 
     return useMutation(registerCompany,{
         onSuccess: (data) => {
-            // queryClient.invalidateQueries("company")
             queryClient.setQueryData('company' , () => data.data)
+            history.push('/',{status : false})
         },
         onError: (error) => {
             var err = error.response.data.error
             toast.error('Company already exists')
         },
     })
-
 }
