@@ -1,61 +1,82 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import noImage from '../../assets/images/noImage.jpg'
+import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
 
-
-const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false ,imgUrl : '',ban : false}
-
+const initialState = {
+  companyName: "",
+  industry: "",
+  email: "",
+  location: "",
+  phone: "",
+  bio: "",
+  website: "",
+  linkedIn: "",
+  facebook: "",
+  twitter: "",
+  instagram: "",
+  password: "",
+  confirmPassword: "",
+  status: false,
+  imgUrl: "",
+  ban: false,
+};
 
 const Register = () => {
-
   const [image, setImage] = useState(noImage);
-  const [formData, setformData] = useState(initialState)
-  const [formErr, setFormErr] = useState(null)
+  const [formData, setformData] = useState(initialState);
+  const [formErr, setFormErr] = useState(null);
 
   const handleChange = (e) => {
-    e.preventDefault()
-    setformData({ ...formData, [e.target.name]: e.target.value })
+    e.preventDefault();
+    setformData({ ...formData, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-      setFormErr('')
-  }, [formData])
+    setFormErr("");
+  }, [formData]);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if(formData.phone.length < 10 ) return setFormErr('Phone number invalid.')
-    if(formData.password.length < 8 ) return setFormErr('Password must need minimum 8 characters.')
-    if(formData.password !== formData.confirmPassword) setFormErr('Passwords does not match.')
-        delete formData.confirmPassword
+    e.preventDefault();
+    if (formData.phone.length < 10) return setFormErr("Phone number invalid.");
+    if (formData.password.length < 8)
+      return setFormErr("Password must need minimum 8 characters.");
+    if (formData.password !== formData.confirmPassword)
+      setFormErr("Passwords does not match.");
+    delete formData.confirmPassword;
 
-        const imageData = new FormData()
-            imageData.append("file",image)
-            imageData.append("upload_preset",process.env.REACT_APP_CLOUDINARY_NAME)
+    const imageData = new FormData();
+    imageData.append("file", image);
+    imageData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_NAME);
 
-            Axios.post(`${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,imageData).then(({data}) => {
-                formData.imgUrl = data.url
-                console.log(formData);
-            }).catch((err) => {
-                console.log("Image upload Err :" ,err);
-            })
+    Axios.post(
+      `${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,
+      imageData
+    )
+      .then(({ data }) => {
+        formData.imgUrl = data.url;
+        console.log(formData);
+      })
+      .catch((err) => {
+        console.log("Image upload Err :", err);
+      });
   };
 
   const handleImageChange = (e) => {
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = () => {
-        if(reader.readyState === 2) {
-            setImage(reader.result)
-        }
-    }
-    reader.readAsDataURL(e.target.files[0])
-}
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   return (
     <div>
-    <div className="container m-auto mt-4">
-    <Link className="font-semibold text-3xl ml-2">JobsWay.</Link>
-    </div>
+      <div className="container m-auto mt-4">
+        <Link className="font-semibold text-3xl ml-2">JobsWay.</Link>
+      </div>
       <div className="flex flex-col items-center py-8">
         <div className="container max-w-screen-md px-5 w-full">
           <h3 className="text-3xl font-semibold mt-8 text-center">
@@ -144,7 +165,7 @@ const Register = () => {
             <div className="mt-3 flex justify-between w-full ">
               <div className="mt-1 flex rounded-md shadow-sm w-full mr-1">
                 <span class="inline-flex items-center px-3 rounded-l-md bg-dark  border-r-0 border-0 text-white text-sm w-44">
-                Website link
+                  Website link
                 </span>
                 <input
                   onChange={handleChange}
@@ -158,7 +179,7 @@ const Register = () => {
             <div className="mt-3 flex justify-between w-full ">
               <div className="mt-1 flex rounded-md shadow-sm w-full mr-1">
                 <span class="inline-flex items-center px-3 rounded-l-md bg-dark  border-r-0 border-0 text-white text-sm">
-                linkedin.com/
+                  linkedin.com/
                 </span>
                 <input
                   onChange={handleChange}
@@ -170,7 +191,7 @@ const Register = () => {
               </div>
               <div className="mt-1 flex rounded-md shadow-sm w-full ml-1">
                 <span class="inline-flex items-center px-3 rounded-l-md bg-dark  border-r-0 border-0 text-white text-sm">
-                twitter.com/
+                  twitter.com/
                 </span>
                 <input
                   onChange={handleChange}
@@ -184,7 +205,7 @@ const Register = () => {
             <div className="mt-3 flex justify-between w-full ">
               <div className="mt-1 flex rounded-md shadow-sm w-full mr-1">
                 <span class="inline-flex items-center px-3 rounded-l-md bg-dark  border-r-0 border-0 text-white text-sm">
-                facebook.com/
+                  facebook.com/
                 </span>
                 <input
                   onChange={handleChange}
@@ -196,7 +217,7 @@ const Register = () => {
               </div>
               <div className="mt-1 flex rounded-md shadow-sm w-full ml-1">
                 <span class="inline-flex items-center px-3 rounded-l-md bg-dark  border-r-0 border-0 text-white text-sm">
-                instagram.com/
+                  instagram.com/
                 </span>
                 <input
                   onChange={handleChange}
@@ -225,15 +246,21 @@ const Register = () => {
               className="mt-2 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
             />
 
-            {formErr && <p className="font-md mt-1" style={{color:'red'}}>{formErr}</p>}
+            {formErr && (
+              <p className="font-md mt-1" style={{ color: "red" }}>
+                {formErr}
+              </p>
+            )}
 
-            <div className="flex items-center justify-center w-full h-full"><button
-              className="w-1/2 rounded-md my-5 bg-primary p-1 h-10"
-              type="submit"
-              style={{ color: "#fff" }}
-            >
-              Register Your Company
-            </button></div>
+            <div className="flex items-center justify-center w-full h-full">
+              <button
+                className="w-1/2 rounded-md my-5 bg-primary p-1 h-10"
+                type="submit"
+                style={{ color: "#fff" }}
+              >
+                Register Your Company
+              </button>
+            </div>
             <div className="text-center w-full">
               <p className="my-2 text-sm font-light ">
                 Already on JobsWay?
