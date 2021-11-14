@@ -1,18 +1,14 @@
 import { QueryClientProvider, QueryClient, useQuery } from "react-query";
-import { BrowserRouter as Router, Route, Switch ,Redirect} from "react-router-dom";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
-import Dashboard from "./components/Dashboard/Dashboard";
+import { BrowserRouter as Router,useLocation} from "react-router-dom";
+
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
-import { useEffect,useState } from "react";
+import { useState,useEffect } from "react";
+import Routed from "./Routed";
 
 function App() {
 
-  const [company, setCompany] = useState(localStorage.getItem('company'))
   const queryClient = new QueryClient('company');
-
-
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -41,17 +37,7 @@ function App() {
         }}
       />
       <Router>
-        <Switch>
-          <Route exact path="/">
-            {company ? <Dashboard/> : <Redirect to="/login"/>}
-          </Route>
-          <Route exact path="/login">
-           {company ? <Redirect to="/" /> : <Login />}
-          </Route>
-          <Route exact path="/register">
-            {company ? <Redirect to="/" /> : <Register />}
-          </Route>
-        </Switch>
+        <Routed/>
       </Router>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>

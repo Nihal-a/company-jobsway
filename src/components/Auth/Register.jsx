@@ -4,6 +4,7 @@ import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
 import { RegisterCompany } from "../../actions/Auth";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../UI/Sidenav/LoadingSpinner/LoadingSpinner";
 
 const initialState = {
   companyName: "",
@@ -43,9 +44,7 @@ const Register = () => {
 
   if (isLoading || loading) {
     return (
-      <div class="flex justify-center items-center w-screen h-screen">
-        <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-      </div>
+      <LoadingSpinner />
     );
   }
 

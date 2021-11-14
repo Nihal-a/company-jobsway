@@ -1,16 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link ,useLocation,useHistory} from 'react-router-dom'
+import { LoginCompany } from '../../actions/Auth'
+import LoadingSpinner from '../UI/Sidenav/LoadingSpinner/LoadingSpinner'
+
+const initialState = { email: '', password: '' }
+
 
 function Login() {
 
-    const handleChange = () => {
+    const location = useLocation()
+    const history = useHistory()
+    const {mutate:login , isLoading} = LoginCompany()
+    const [formData, setFormData] = useState(initialState)
+    const [loginErr, setLoginErr] = useState('')
+    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+
+    useEffect(() => {
+        setCompany(JSON.parse(localStorage.getItem('company')))
+    }, [location])
+
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        setFormData({...formData,[e.target.name] : e.target.value})
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        login(formData)
+    }
+    if(isLoading){
+        <LoadingSpinner />
+    }
         
-    }
-    const handleSubmit = () => {
-
-    }
-
+ 
     return (
         <>
 
@@ -18,7 +41,7 @@ function Login() {
             <Link className="font-semibold text-3xl absolute top-12 left-10">JobsWay.</Link>
             <form action="" className="flex flex-col justify-between items-center p-3" onSubmit={handleSubmit} >
                 <h3 className="-mt-10"><span className="text-primary">Log In to your</span> Company</h3>
-                {/* {loginErr && <p className="text-sm font-light mt-3" style={{color:'red'}}>{loginErr}</p> } */}
+                {loginErr && <p className="text-sm font-light mt-3" style={{color:'red'}}>{loginErr}</p> }
                 <input required onChange={handleChange} name="email" type="email" placeholder="Email" className="m-1 mt-8 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
                 <input required onChange={handleChange} name="password" type="password" placeholder="Password" className="m-1 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
                 <Link href="" className="text-sm font-light underline w-full text-right mr-14 mt-2">Forgot Password</Link>

@@ -1,5 +1,5 @@
 import {  useMutation, useQueryClient } from 'react-query'
-import {registerCompany} from '../api/index'
+import {loginCompany, registerCompany} from '../api/index'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
 import swal from 'sweetalert'
@@ -17,11 +17,25 @@ export const RegisterCompany = () => {
         },
         onError: (error) => {
             var err = error.response.data.error
-            toast.error('Company already exists')
+            toast.error(err)
         },
     })
 }
 
-export const fetchCompany =() => {
+export const LoginCompany = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
 
+    return useMutation(loginCompany,{
+        onSuccess: ({data}) => {
+            queryClient.setQueryData('company' , () => data.data)
+            localStorage.setItem('company' , JSON.stringify(data))
+            history.push('/')
+        },
+        onError: (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        },
+    })
 }
+
