@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
+import {  RegisterCompany } from "../../actions/Auth";
+import toast from "react-hot-toast";
+
 
 const initialState = {
   companyName: "",
@@ -26,6 +29,8 @@ const Register = () => {
   const [image, setImage] = useState(noImage);
   const [formData, setformData] = useState(initialState);
   const [formErr, setFormErr] = useState(null);
+  const {mutate : registerCompany ,isLoading} = RegisterCompany()
+  const history = useHistory()
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -36,13 +41,21 @@ const Register = () => {
     setFormErr("");
   }, [formData]);
 
+  if(isLoading){
+    return(
+        <div class="flex justify-center items-center">
+  <div
+    class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"
+  ></div>
+</div>
+    )
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.phone.length < 10) return setFormErr("Phone number invalid.");
-    if (formData.password.length < 8)
-      return setFormErr("Password must need minimum 8 characters.");
-    if (formData.password !== formData.confirmPassword)
-      setFormErr("Passwords does not match.");
+    if (formData.password.length < 8) return setFormErr("Password must need minimum 8 characters.");
+    if (formData.password !== formData.confirmPassword) return setFormErr("Passwords does not match.");
     delete formData.confirmPassword;
 
     const imageData = new FormData();
@@ -55,7 +68,7 @@ const Register = () => {
     )
       .then(({ data }) => {
         formData.imgUrl = data.url;
-        console.log(formData);
+        registerCompany(formData)
       })
       .catch((err) => {
         console.log("Image upload Err :", err);
