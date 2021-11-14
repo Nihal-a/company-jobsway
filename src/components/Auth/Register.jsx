@@ -1,16 +1,45 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import noImage from '../../assets/images/noImage.jpg'
+import Axios from "axios";
 
 
-const initialState = {};
+const initialState = { companyName: '', industry: '', email: '', location: '', phone: '', bio: '', website: '', linkedIn: '', facebook: '', twitter: '', instagram: '', password: '', confirmPassword: '', status:false ,imgUrl : '',ban : false}
+
 
 const Register = () => {
+
   const [image, setImage] = useState(noImage);
+  const [formData, setformData] = useState(initialState)
+  const [formErr, setFormErr] = useState(null)
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    e.preventDefault()
+    setformData({ ...formData, [e.target.name]: e.target.value })
+  };
 
-  const handleSubmit = () => {};
+  useEffect(() => {
+      setFormErr('')
+  }, [formData])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(formData.phone.length < 10 ) return setFormErr('Phone number invalid.')
+    if(formData.password.length < 8 ) return setFormErr('Password must need minimum 8 characters.')
+    if(formData.password !== formData.confirmPassword) setFormErr('Passwords does not match.')
+        delete formData.confirmPassword
+
+        const imageData = new FormData()
+            imageData.append("file",image)
+            imageData.append("upload_preset",process.env.REACT_APP_CLOUDINARY_NAME)
+
+            Axios.post(`${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,imageData).then(({data}) => {
+                formData.imgUrl = data.url
+                console.log(formData);
+            }).catch((err) => {
+                console.log("Image upload Err :" ,err);
+            })
+  };
 
   const handleImageChange = (e) => {
     const reader = new FileReader()
@@ -25,7 +54,7 @@ const Register = () => {
   return (
     <div>
     <div className="container m-auto mt-4">
-    <Link className="font-semibold text-3xl">JobsWay.</Link>
+    <Link className="font-semibold text-3xl ml-2">JobsWay.</Link>
     </div>
       <div className="flex flex-col items-center py-8">
         <div className="container max-w-screen-md px-5 w-full">
@@ -145,7 +174,7 @@ const Register = () => {
                 </span>
                 <input
                   onChange={handleChange}
-                  name="linkedIn"
+                  name="twitter"
                   type="text"
                   placeholder="Username"
                   className="ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
@@ -195,6 +224,8 @@ const Register = () => {
               placeholder="Confirm Password"
               className="mt-2 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
             />
+
+            {formErr && <p className="font-md mt-1" style={{color:'red'}}>{formErr}</p>}
 
             <div className="flex items-center justify-center w-full h-full"><button
               className="w-1/2 rounded-md my-5 bg-primary p-1 h-10"
