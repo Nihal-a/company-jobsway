@@ -10,13 +10,18 @@ export const RegisterCompany = () => {
     const queryClient = useQueryClient()
 
     return useMutation(registerCompany,{
-        onSuccess: (data) => {
+        onSuccess: ({data}) => {
             queryClient.setQueryData('company' , () => data.data)
-            history.push('/',{status : false})
+            localStorage.setItem('company' , JSON.stringify(data))
+            history.push('/')
         },
         onError: (error) => {
             var err = error.response.data.error
             toast.error('Company already exists')
         },
     })
+}
+
+export const fetchCompany =() => {
+
 }

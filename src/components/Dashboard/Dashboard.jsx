@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import SideNav from '../UI/Sidenav/SideNav'
-import {  } from 'react-query'
+import { QueryClient, useQuery } from 'react-query'
 import { useLocation } from 'react-router-dom'
+import { fetchCompany } from '../../actions/Auth'
 
 
 function Dashboard() {
 
-    // const {} = useQuery('company')
-
-    const [company, setCompany] = useState('')
-
+    // const [company, setCompany] = useState('')
     const location = useLocation()
-
-    useEffect(() => {
-        console.log(location.state);
-    }, [location])
 
     return (
         <div>
