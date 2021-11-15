@@ -13,27 +13,31 @@ const SideNav = () => {
             <div className="h-screen w-64 bg-white border-r-2 flex flex-col justify-between items-center sticky top-0">
             <Link className="font-semibold text-xl mt-4">JobsWay.</Link>
 
-            <div className="flex items-start justify-start h-auto flex-col mx-16 mb-20">
-                <a href="" className="nav-items flex my-2 items-center justify-start">
+            <div className="flex items-start justify-start h-auto flex-col mx-16 ">
+                <Link to="/" href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon icon="akar-icons:home" className="mr-3 text-xl" />
                     <p className="text-lg font-light">Dashboard</p>
-                </a>
-                <a href="" className="nav-items flex my-2 items-center justify-start">
-                    <Icon className="mr-3 text-xl" icon="bx:bx-buildings" />
-                    <p className="text-lg font-light">Companies</p>
-                </a>
-                <a href="" className="nav-items flex my-2 items-center justify-start">
-                    <Icon className="mr-3 text-xl" icon="clarity:users-line" />
-                    <p className="text-lg font-light">Users</p>
-                </a>
-                <a href="" className="nav-items flex my-2 items-center justify-start">
-                    <Icon className="mr-3 text-xl" icon="bytesize:settings" />
-                    <p className="text-lg font-light">Settings</p>
-                </a>
-                <a href="" className="nav-items flex my-2 items-center justify-start">
+                </Link>
+                <Link to="/jobs" href="" className="nav-items flex my-3 items-center justify-start">
+                    <Icon className="mr-3 text-xl" icon="akar-icons:credit-card" />
+                    <p className="text-lg font-light">Jobs</p>
+                </Link>
+                <Link to="/applications" href="" className="nav-items flex my-3 items-center justify-start">
+                    <Icon className="mr-3 text-xl" icon="simple-line-icons:doc" />
+                    <p className="text-lg font-light">Applications</p>
+                </Link>
+                <Link to="/shortlist" href="" className="nav-items flex my-3 items-center justify-start">
+                    <Icon className="mr-3 text-xl" icon="carbon:list-boxes" />
+                    <p className="text-lg font-light">Shortlist</p>
+                </Link>
+                <Link to="/profile" href="" className="nav-items flex my-3 items-center justify-start">
+                    <Icon className="mr-3 text-xl" icon="iconoir:profile-circled" />
+                    <p className="text-lg font-light">Profile</p>
+                </Link>
+                <Link to="/logout" href="" className="nav-items flex my-3 items-center justify-start" >
                     <Icon className="mr-3 text-xl" icon="simple-line-icons:logout" />
                     <p className="text-lg font-light">Logout</p>
-                </a>
+                </Link>
             </div>
             <div className="flex items-center flex-col">
             <div className="w-20 h-20 rounded-md">
