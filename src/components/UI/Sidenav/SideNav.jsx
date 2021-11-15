@@ -1,8 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
+import { useCompanyDetails } from '../../../Hooks/Company';
 
-const SideNav = (props) => {
+const SideNav = () => {
+
+    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+    const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
+
     return (
         <div>
             <div className="h-screen w-64 bg-white border-r-2 flex flex-col justify-between items-center sticky top-0">
@@ -30,8 +35,12 @@ const SideNav = (props) => {
                     <p className="text-lg font-light">Logout</p>
                 </a>
             </div>
-
-            <h4 className="mb-6">{props.companyName}</h4>
+            <div className="flex items-center flex-col">
+            <div className="w-20 h-20 rounded-md">
+                <img src={data?.data.company.imgUrl} alt="" className="rounded-md"/>
+            </div>
+            <h4 className="mb-6 mt-4 font-semibold">{data?.data.company.companyName}</h4>
+            </div>
         </div>
         </div>
     )

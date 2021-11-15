@@ -44,7 +44,7 @@ function Dashboard() {
         </div> :
         <>
             <div className="flex">
-                <SideNav companyName={data?.data.company.companyName}/>
+                <SideNav />
                 <div className="w-full">
                 <PageHeader name={data?.data?.company.companyName} desc="Welcome Back!"/>
                 <div className="mt-12 px-8 container w-full">
@@ -52,7 +52,7 @@ function Dashboard() {
                         <DashBoardCards number={14} data="New Applications" />
                         <DashBoardCards number={7} data="Jobs" />
                     </div>
-                    <div className="">
+                    <div className="mt-10">
                         <TaskCompleteCard name="Nihal avulan" />
                         <TaskCompleteCard name="John doe" />
                     </div>
