@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import JobsCard from './JobsCard'
 
+
 const JobsCardWithButtons = () => {
     return (
         <div className="flex items-center justify-around">

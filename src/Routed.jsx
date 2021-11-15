@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { useEffect,useState } from "react";
 import ReRegister from "./components/Auth/ReRegister";
 import Jobs from "./components/Jobs/Jobs";
+import Applications from "./components/Applications/Applications";
 
 
 const Routed = () => {
@@ -18,21 +19,34 @@ const Routed = () => {
 
     return (
         <Switch>
+
+          //Main
           <Route exact path="/">
             {company ? <Dashboard/> : <Redirect to="/login"/>}
           </Route>
+
+
+          //Auth
           <Route path="/login">
            {company ? <Redirect to="/" /> : <Login />}
           </Route>
           <Route path="/register">
             {company ? <Redirect to="/" /> : <Register />}
           </Route>
-          <Route path="/jobs">
-            {company ?  <Jobs /> : <Redirect to="/login" />}
-          </Route>
           <Route path="/reregister">
             {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
+
+
+          //Pages
+          <Route path="/jobs">
+            {company ?  <Jobs /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/applications">
+            {company ?  <Applications /> : <Redirect to="/login" />}
+          </Route>
+
+
         </Switch>
     )
 }

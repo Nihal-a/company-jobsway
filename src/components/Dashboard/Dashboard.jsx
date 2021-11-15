@@ -9,8 +9,8 @@ import UnverifiedCompany from './UnverifiedCompany'
 import BannedCompany from './BannedCompany'
 import Logo from '../UI/Logo/Logo'
 import PageHeader from '../UI/Items/PageHeader'
-import DashBoardCards from '../UI/Items/DashBoardCards'
-import TaskCompleteCard from '../UI/Items/TaskCompleteCard'
+import DashBoardCards from './DashBoardCards'
+import TaskCompleteCard from './TaskCompleteCard'
 
 
 
@@ -53,6 +53,12 @@ function Dashboard() {
                         <DashBoardCards number={7} data="Jobs" />
                     </div>
                     <div className="mt-10">
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
                         <TaskCompleteCard name="Nihal avulan" />
                         <TaskCompleteCard name="John doe" />
                     </div>

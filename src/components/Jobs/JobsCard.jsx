@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import googleLogo from '../../../assets/images/noImage.jpg'
+import googleLogo from '../../assets/images/noImage.jpg'
 import { Icon } from '@iconify/react';
 
 function JobsCard() {

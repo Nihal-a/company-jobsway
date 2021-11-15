@@ -4,7 +4,8 @@ import { useCompanyDetails } from "../../Hooks/Company";
 import PageHeader from "../UI/Items/PageHeader";
 import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
-import JobsCardWithButtons from "../UI/Items/JobsCardWithButtons";
+import JobsCardWithButtons from "./JobsCardWithButtons";
+
 
 
 function Jobs() {
