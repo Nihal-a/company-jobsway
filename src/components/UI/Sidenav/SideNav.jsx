@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 
-const SideNav = () => {
+const SideNav = (props) => {
     return (
         <div>
             <div className="h-screen w-64 bg-white border-r-2 flex flex-col justify-between items-center">
@@ -31,7 +31,7 @@ const SideNav = () => {
                 </a>
             </div>
 
-            <h4 className="mb-6">Crossroads</h4>
+            <h4 className="mb-6">{props.companyName}</h4>
         </div>
         </div>
     )
