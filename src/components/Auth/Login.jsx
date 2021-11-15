@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Link ,useLocation,useHistory} from 'react-router-dom'
 import { LoginCompany } from '../../Hooks/Auth'
-import LoadingSpinner from '../UI/Sidenav/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 
 const initialState = { email: '', password: '' }
 

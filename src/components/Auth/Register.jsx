@@ -4,7 +4,8 @@ import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
 import { RegisterCompany } from "../../Hooks/Auth";
 import toast from "react-hot-toast";
-import LoadingSpinner from "../UI/Sidenav/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import Logo from "../UI/Logo/Logo";
 
 const initialState = {
   companyName: "",
@@ -89,9 +90,7 @@ const Register = () => {
 
   return (
     <div>
-      <div className="container m-auto mt-4">
-        <Link className="font-semibold text-3xl ml-2">JobsWay.</Link>
-      </div>
+      <Logo />
       <div className="flex flex-col items-center py-8">
         <div className="container max-w-screen-md px-5 w-full">
           <h3 className="text-3xl font-semibold mt-8 text-center">
