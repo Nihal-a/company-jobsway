@@ -22,6 +22,7 @@ module.exports = {
         'dark': '#2c2c2c',
         'danger': '#C30101',
         'success': '#00B512',
+        'warning': '#BE7E01',
 
     }),
     variants: {

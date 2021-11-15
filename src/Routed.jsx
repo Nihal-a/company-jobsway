@@ -4,6 +4,7 @@ import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { useEffect,useState } from "react";
 import ReRegister from "./components/Auth/ReRegister";
+import Jobs from "./components/Jobs/Jobs";
 
 
 const Routed = () => {
@@ -25,6 +26,9 @@ const Routed = () => {
           </Route>
           <Route path="/register">
             {company ? <Redirect to="/" /> : <Register />}
+          </Route>
+          <Route path="/jobs">
+            {company ?  <Jobs /> : <Redirect to="/login" />}
           </Route>
           <Route path="/reregister">
             {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
