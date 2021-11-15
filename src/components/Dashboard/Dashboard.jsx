@@ -68,8 +68,9 @@ function Dashboard() {
             </div>
         </>
         : 
-        data?.data.company.status == false ? <UnverifiedCompany /> :  <div className="flex flex-col items-center justify-center"><h2 className="text-2xl mt-4 text-center">Your Company has been Rejected.</h2>
-        <p className="text-center mt-6 text-md font-medium " style={{ color: 'red' }}>Reason : <br /> {data?.data.company?.reason}</p>
+        data?.data.company.status == false ? <UnverifiedCompany /> :  <div className="flex flex-col items-center justify-center"><h2 className="text-2xl mt-4 text-center font-semibold" style={{color:'red'}}>Your Company has been Rejected.</h2>
+        <h6 className="text-md">Check the reasons for rejetion and try to reapply, All the best.</h6>
+        <p className="text-center mt-6 text-md font-medium " style={{ color: 'red' }}>Reasons : <br /> {data?.data.company?.reason}</p>
         <Link onClick={handleReRegister} className="underline text-sm mt-8 text-primary ">Re-register company</Link> </div>}
         </>
     )

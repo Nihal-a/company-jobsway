@@ -15,9 +15,9 @@ const Profile = () => {
         <div className="flex">
             <SideNav />
             <div className="w-full">
-                <PageHeader name="Nihal" desc="Verify Companies" />
+                <PageHeader name={data?.data?.company.companyName} desc="Welcome Back!" />
                 <div className="mt-12 px-8 container w-full">
-                    <h5 className="text-xl font-semibold text-dark mb-8">Company Details :</h5>
+                    <h5 className="text-xl font-semibold text-dark mb-8">Company Profile :</h5>
                     <div className="w-full h-40 flex items-center justify-center flex-col">
                         <img src={data?.data.company.imgUrl} alt="Company logo" className="w-32 rounded-md shadow-xl bg-primary" />
                         <h4 className="mt-3 text-2xl font-semibold ">{data?.data.company.companyName}</h4>
