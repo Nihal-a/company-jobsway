@@ -3,6 +3,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { useEffect,useState } from "react";
+import ReRegister from "./components/Auth/ReRegister";
 
 
 const Routed = () => {
@@ -11,6 +12,7 @@ const Routed = () => {
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
+        console.log(location?.state?.reRegister);
     }, [location])
 
     return (
@@ -23,6 +25,9 @@ const Routed = () => {
           </Route>
           <Route path="/register">
             {company ? <Redirect to="/" /> : <Register />}
+          </Route>
+          <Route path="/reregister">
+            {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
         </Switch>
     )

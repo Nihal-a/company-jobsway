@@ -1,5 +1,5 @@
 import {  useMutation, useQueryClient } from 'react-query'
-import {loginCompany, registerCompany} from '../api/index'
+import {loginCompany, registerCompany, reregister} from '../api/index'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
 import swal from 'sweetalert'
@@ -39,3 +39,19 @@ export const LoginCompany = () => {
     })
 }
 
+export const ReRegisterCompany = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+    return useMutation(reregister,{
+        onSuccess : ({data}) => {
+            queryClient.setQueryData('company' , () => data.data)
+            localStorage.setItem('company' , JSON.stringify(data))
+            history.push('/')
+        },
+        onError : (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        }
+    })
+}

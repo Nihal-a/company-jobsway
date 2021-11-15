@@ -1,5 +1,5 @@
 import SideNav from '../UI/Sidenav/SideNav'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation,useHistory } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import {  useCompanyDetails } from '../../Hooks/Company'
 import { useEffect, useState } from 'react'
@@ -13,16 +13,21 @@ import Logo from '../UI/Logo/Logo'
 
 function Dashboard() {
 
-    const location = useLocation()
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-
     const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
+    const history = useHistory()
+    const location = useLocation()
 
     if(isLoading){
         <LoadingSpinner />
     }
     if(isError){
         console.log("Error : ",error);
+    }
+
+    const handleReRegister = (e) => {
+        e.preventDefault()
+        history.push('/reregister' , {reRegister : true})
     }
 
     return (
@@ -42,7 +47,7 @@ function Dashboard() {
         : 
         data?.data.company.status == false ? <UnverifiedCompany /> :  <div className="flex flex-col items-center justify-center"><h2 className="text-2xl mt-4 text-center">Your Company has been Rejected.</h2>
         <p className="text-center mt-6 text-md font-medium " style={{ color: 'red' }}>Reason : <br /> {data?.data.company?.reason}</p>
-        <Link onClick className="underline text-sm mt-8 text-primary ">Re-register company</Link> </div>}
+        <Link onClick={handleReRegister} className="underline text-sm mt-8 text-primary ">Re-register company</Link> </div>}
         </>
     )
 }
