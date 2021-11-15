@@ -4,11 +4,12 @@ import { useCompanyDetails } from "../../Hooks/Company";
 import PageHeader from "../UI/Items/PageHeader";
 import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
-import JobsCardWithButtons from "./JobsCardWithButtons";
+import ShortListCardWithButtons from "./ShortListCardWithButtons";
 
 
 
-function Jobs() {
+
+function Shortlist() {
   const [company, setCompany] = useState(
     JSON.parse(localStorage.getItem("company"))
   );
@@ -28,20 +29,18 @@ function Jobs() {
           <div className="mt-12 px-8 container w-full">
             <div className="flex w-full justify-between items-center">
               <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
-                Jobs :
+                Short Listed :
               </h5>
               <Link className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
-                <p>Add New Job </p>
-                <Icon icon="akar-icons:plus" className="text-xl ml-2" />
+                <p>Task set </p>
               </Link>
             </div>
 
             <div className="mt-8 mb-8">
-                <JobsCardWithButtons />
-                <JobsCardWithButtons />
-                <JobsCardWithButtons />
-                <JobsCardWithButtons />
-                <JobsCardWithButtons />
+                <ShortListCardWithButtons />
+                <ShortListCardWithButtons />
+                <ShortListCardWithButtons />
+                <ShortListCardWithButtons />
             </div>
 
           </div>
@@ -51,4 +50,4 @@ function Jobs() {
   );
 }
 
-export default Jobs;
+export default Shortlist;

@@ -6,6 +6,7 @@ import { useEffect,useState } from "react";
 import ReRegister from "./components/Auth/ReRegister";
 import Jobs from "./components/Jobs/Jobs";
 import Applications from "./components/Applications/Applications";
+import Shortlist from "./components/ShortList/Shortlist";
 
 
 const Routed = () => {
@@ -44,6 +45,9 @@ const Routed = () => {
           </Route>
           <Route path="/applications">
             {company ?  <Applications /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/shortlist">
+            {company ?  <Shortlist /> : <Redirect to="/login" />}
           </Route>
 
 

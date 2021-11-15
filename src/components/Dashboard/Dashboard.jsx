@@ -52,7 +52,7 @@ function Dashboard() {
                         <DashBoardCards number={14} data="New Applications" />
                         <DashBoardCards number={7} data="Jobs" />
                     </div>
-                    <div className="mt-10">
+                    <div className="mt-10 mb-8">
                         <TaskCompleteCard name="Nihal avulan" />
                         <TaskCompleteCard name="John doe" />
                         <TaskCompleteCard name="Nihal avulan" />
