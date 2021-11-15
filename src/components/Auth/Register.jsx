@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
-import { RegisterCompany } from "../../actions/Auth";
+import { RegisterCompany } from "../../Hooks/Auth";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../UI/Sidenav/LoadingSpinner/LoadingSpinner";
 
