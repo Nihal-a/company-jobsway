@@ -59,6 +59,9 @@ const Routed = () => {
           <Route path="/add-job">
             {company ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
+          <Route path="/edit-job">
+            {company ?  <AddJob /> : <Redirect to="/login" />}
+          </Route>
 
 
         </Switch>

@@ -8,10 +8,15 @@ const SideNav = () => {
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
     const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
 
+    const logout = () => {
+        localStorage.removeItem('company')
+        setCompany(null)
+    }
+
     return (
         <div>
             <div className="h-screen w-64 bg-white border-r-2 flex flex-col justify-between items-center sticky top-0">
-            <Link className="font-semibold text-xl mt-4">JobsWay.</Link>
+            <Link to="/" className="font-semibold text-xl mt-4">JobsWay.</Link>
 
             <div className="flex items-start justify-start h-auto flex-col mx-16 ">
                 <Link to="/" href="" className="nav-items flex my-3 items-center justify-start">
@@ -34,7 +39,7 @@ const SideNav = () => {
                     <Icon className="mr-3 text-xl" icon="iconoir:profile-circled" />
                     <p className="text-lg font-light">Profile</p>
                 </Link>
-                <Link to="/logout" href="" className="nav-items flex my-3 items-center justify-start" >
+                <Link to="/" href="" className="nav-items flex my-3 items-center justify-start" onClick={logout}>
                     <Icon className="mr-3 text-xl" icon="simple-line-icons:logout" />
                     <p className="text-lg font-light">Logout</p>
                 </Link>
