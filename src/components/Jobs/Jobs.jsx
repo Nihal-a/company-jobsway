@@ -30,7 +30,7 @@ function Jobs() {
               <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
                 Jobs :
               </h5>
-              <Link className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
+              <Link to="/add-job" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
                 <p>Add New Job </p>
                 <Icon icon="akar-icons:plus" className="text-xl ml-2" />
               </Link>

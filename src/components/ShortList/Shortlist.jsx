@@ -32,7 +32,7 @@ function Shortlist() {
                 Short Listed :
               </h5>
               <Link className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
-                <p>Task set </p>
+                <p>Task Sets </p>
               </Link>
             </div>
 

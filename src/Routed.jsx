@@ -8,6 +8,7 @@ import Jobs from "./components/Jobs/Jobs";
 import Applications from "./components/Applications/Applications";
 import Shortlist from "./components/ShortList/Shortlist";
 import Profile from "./components/Profile/Profile";
+import AddJob from "./components/Jobs/AddJob";
 
 
 const Routed = () => {
@@ -52,6 +53,11 @@ const Routed = () => {
           </Route>
           <Route path="/profile">
             {company ?  <Profile /> : <Redirect to="/login" />}
+          </Route>
+
+          //Subpages
+          <Route path="/add-job">
+            {company ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
 
 
