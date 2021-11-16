@@ -3,11 +3,27 @@ import { Link } from "react-router-dom";
 import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
 
+
+
+
 const AddJob = () => {
   const [qualifications, setQualifications] = useState([{ value: null }]);
+  const [languages, setLanguages] = useState([])
+  const [skills, setSkills] = useState(["english , malayalam"])
+
 
   const handleChange = () => {};
   const handleSubmit = () => {};
+
+  const handleSkillChange = (e) => {
+    var skill = e.target.value.split(',');
+    setSkills(skill)
+  }
+
+  const handleLangChange = (e) => {
+    var lang = e.target.value.split(',');
+    setLanguages(lang)
+  }
 
   const handleAddQualification = () => {
       const values = [...qualifications]
@@ -127,13 +143,6 @@ const AddJob = () => {
                   Salary
                 </label>
                 <div className="flex justify-between items-center">
-                  <input
-                    class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-city"
-                    type="number"
-                    placeholder="0"
-                    min="0"
-                  />
                   <span className="mx-4">To</span>
                   <input
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -181,6 +190,75 @@ const AddJob = () => {
                 </div>
             </div>
 
+            <div className="flex justify-between w-full ">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2"
+                  for="grid-first-name"
+                >
+                  Education
+                </label>
+                <input
+                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name"
+                  type="text"
+                  placeholder=""
+                />
+                {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+              </div>
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2"
+                  for="grid-first-name"
+                >
+                  Job Location
+                </label>
+                <input
+                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name"
+                  type="text"
+                  placeholder=""
+                />
+                {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+              </div>
+            </div>
+
+
+            <div className="flex justify-between w-full ">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2"
+                  for="grid-first-name"
+                >
+                  Skills
+                </label>
+                <input
+                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name"
+                  type="text"
+                  placeholder="Separated by Coma.."
+                  onChange={handleSkillChange}
+                />
+                {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+              </div>
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  class="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2"
+                  for="grid-first-name"
+                >
+                  Language
+                </label>
+                <input
+                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  id="grid-first-name"
+                  type="text"
+                  placeholder="Separated by Coma.."
+                  onChange={handleLangChange}
+                />
+                {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
+              </div>
+            </div>
+
             {/* {formErr && (
               <p className="font-md mt-1" style={{ color: "red" }}>
                 {formErr}
@@ -189,24 +267,12 @@ const AddJob = () => {
 
             <div className="flex items-center justify-center w-full h-full">
               <button
-                className="w-1/2 rounded-md my-5 bg-primary p-1 h-10"
+                className="w-1/4 rounded-md my-5 bg-primary p-1 h-10"
                 type="submit"
                 style={{ color: "#fff" }}
               >
-                Register Your Company
+                Proceed to Payment
               </button>
-            </div>
-            <div className="text-center w-full">
-              <p className="my-2 text-sm font-light ">
-                Already on JobsWay?
-                <Link
-                  to="/login"
-                  style={{ color: "#008FAE" }}
-                  className="underline "
-                >
-                  Log in now
-                </Link>
-              </p>
             </div>
           </form>
         </div>
