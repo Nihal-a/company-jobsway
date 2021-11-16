@@ -4,32 +4,52 @@ import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
 
 
+const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',timeSchedule : '',minSalary : '',maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : ''}
+
 
 
 const AddJob = () => {
   const [qualifications, setQualifications] = useState([{ value: null }]);
+  const [qualificationValues, setQualificationValues] = useState([]);
   const [languages, setLanguages] = useState([])
-  const [skills, setSkills] = useState(["english , malayalam"])
+  const [skills, setSkills] = useState([])
+  const [formData, setFormData] = useState(initialState)
 
 
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+      e.preventDefault()
+      formData.skills = skills 
+      formData.language = languages
+      const num = qualifications.length
 
-  const handleSkillChange = (e) => {
-    var skill = e.target.value.split(',');
-    setSkills(skill)
+      formData.qualification = qualifications[num-1]
+      console.log("formdata : ",formData);
+      // login(formData)
+    }
+    const handleSkillChange = (e) => {
+        var skill = e.target.value.split(',');
+        setSkills(skill)
+    }
+    
+    const handleQualificationChange = (e) => {
+        setQualificationValues([...qualificationValues,e.target.value])
+    }
+
+    const handleChange = (e) => {
+      e.preventDefault()
+      setFormData({...formData,[e.target.name] : e.target.value})
   }
-
   const handleLangChange = (e) => {
     var lang = e.target.value.split(',');
     setLanguages(lang)
   }
 
-  const handleAddQualification = () => {
+  const handleAddQualification = (e) => {
       const values = [...qualifications]
-      values.push({value:null})
+      values.push(qualificationValues)
       setQualifications(values)
   }
+
 
   const handleRemoveQualification = (i) => {
       const values = [...qualifications]
@@ -63,9 +83,11 @@ const AddJob = () => {
                   Job Title
                 </label>
                 <input
+                    onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
+                  name="jobTitle"
                   placeholder=""
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
@@ -78,10 +100,12 @@ const AddJob = () => {
                   Category
                 </label>
                 <input
+                    onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
+                  name="jobCategory"
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
@@ -96,19 +120,23 @@ const AddJob = () => {
                 </label>
                 <div className="flex justify-between items-center">
                   <input
+                    onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
                     type="number"
                     placeholder="0"
                     min="0"
+                    name="minExp"
                   />
                   <span className="mx-4">To</span>
                   <input
+                    onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
                     type="number"
                     placeholder="1"
                     min="1"
+                    name="maxExp"
                   />
                 </div>
               </div>
@@ -117,19 +145,23 @@ const AddJob = () => {
                 <div class="mt-2">
                   <label class="inline-flex items-center">
                     <input
+                        onChange={handleChange}
                       type="radio"
                       class="form-radio"
                       name="accountType"
                       value="fullTime"
+                      name="timeSchedule"
                     />
                     <span class="ml-2">Full Time</span>
                   </label>
                   <label class="inline-flex items-center ml-6">
                     <input
+                        onChange={handleChange}
                       type="radio"
                       class="form-radio"
                       name="accountType"
                       value="partTime"
+                      name="timeSchedule"
                     />
                     <span class="ml-2">Part Time</span>
                   </label>
@@ -143,13 +175,24 @@ const AddJob = () => {
                   Salary
                 </label>
                 <div className="flex justify-between items-center">
+                  <input
+                    onChange={handleChange}
+                    class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-city"
+                    type="number"
+                    placeholder="0"
+                    min="1"
+                    name="minSalary"
+                  />
                   <span className="mx-4">To</span>
                   <input
+                    onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
                     type="number"
                     placeholder="50000"
                     min="1"
+                    name="maxSalary"
                   />
                 </div>
               </div>
@@ -169,10 +212,13 @@ const AddJob = () => {
                         {qualifications.map((qualified, idx) => (
                         <div className="flex items-center">
                             <input
+                                
                           class="appearance-none my-2 block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                           id="grid-password"
                           type="text"
-                          placeholder=""
+                          placeholder={`Qualification ${idx+1}`}
+                          name="qualification"
+                          onChange={handleQualificationChange}
                         />
                         <div className="py-3 px-3 ml-4 my-2 rounded-md bg-secondary flex items-center justify-center cursor-pointer" onClick={() => handleRemoveQualification(idx)}>
                         <Icon icon="ant-design:delete-outlined" />
@@ -199,10 +245,12 @@ const AddJob = () => {
                   Education
                 </label>
                 <input
+                    onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
+                  name="education"
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
@@ -214,10 +262,12 @@ const AddJob = () => {
                   Job Location
                 </label>
                 <input
+                    onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
+                  name="jobLocation"
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
@@ -238,6 +288,7 @@ const AddJob = () => {
                   type="text"
                   placeholder="Separated by Coma.."
                   onChange={handleSkillChange}
+                  name="skills"
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
@@ -254,6 +305,7 @@ const AddJob = () => {
                   type="text"
                   placeholder="Separated by Coma.."
                   onChange={handleLangChange}
+                  name="language"
                 />
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
