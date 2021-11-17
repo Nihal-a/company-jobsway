@@ -14,6 +14,9 @@ module.exports = {
       'primary': '#008FAE',
       'secondary': '#8B8B8B',
       'white': '#fff',
+      'danger': '#C30101',
+      'success': '#00B512',
+      'warning': '#BE7E01',
     },
     backgroundColor: theme => ({
         ...theme('colors'),

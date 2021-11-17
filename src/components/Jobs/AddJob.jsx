@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link,useHistory } from "react-router-dom";
 import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
@@ -13,29 +13,33 @@ const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',t
 
 const AddJob = () => {
   
-
   const {mutate : AddTheJob } = AddNewJob()
   const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
   const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
-  const [qualifications, setQualifications] = useState([{ value: null }]);
-  const [qualificationValues, setQualificationValues] = useState([]);
   const [languages, setLanguages] = useState([])
   const [skills, setSkills] = useState([])
   const [formData, setFormData] = useState(initialState)
   const history = useHistory()
+  const [qualificationValues, setqualificationValues] = useState([{qualification : ""}])
+  const [errors, setErrors] = useState('')
+  const [ind, setInd] = useState(0)
 
+
+  useEffect(() => {
+    setErrors('')
+  }, [formData,qualificationValues])
 
 
   const handleSubmit = (e) => {
       e.preventDefault()
       formData.skills = skills 
       formData.language = languages
-      const num = qualifications.length
-      formData.qualification = qualifications[num-1]
+      formData.qualification = qualificationValues
       formData.createdAt = moment().format('YYYYMMDDhmmssa')
       var id = company.company._id
       AddTheJob({formData , id})
     }
+
     const handleSkillChange = (e) => {
         var skill = e.target.value.split(',');
         setSkills(skill)
@@ -47,9 +51,26 @@ const AddJob = () => {
       );
     }
     
-    const handleQualificationChange = (e) => {
-        setQualificationValues([...qualificationValues,e.target.value])
+    const handleQualificationChange = (i,e) => {
+        let newQualificationValues = [...qualificationValues]
+        newQualificationValues[i][e.target.name] = e.target.value
+        setqualificationValues(newQualificationValues)
     }
+
+
+    const addQualificationValues = () => {
+      if(qualificationValues[ind].qualification.trim() == '') return setErrors('Enter the Qualification')
+      setqualificationValues([...qualificationValues,{qualification : ""}])
+      setInd(ind + 1)
+    }
+
+    const removeQualificationValues = (i) => {
+      let newQualificationValues = [...qualificationValues]
+      newQualificationValues.splice(i,1)
+      setqualificationValues(newQualificationValues)
+      setInd(ind - 1)
+    }
+
 
     const handleChange = (e) => {
       e.preventDefault()
@@ -60,20 +81,6 @@ const AddJob = () => {
     setLanguages(lang)
   }
 
-  const handleAddQualification = (e) => {
-      const values = [...qualifications]
-      values.push(qualificationValues)
-      setQualifications(values)
-  }
-
-
-  const handleRemoveQualification = (i) => {
-      const values = [...qualifications]
-      if(i >= 1){
-        values.splice(i,1)
-      }
-      setQualifications(values)
-  }
 
   return (
     <div>
@@ -233,25 +240,28 @@ const AddJob = () => {
                       </label>
                       <div className="flex items-end  w-full ">
                         <div className="w-full">
-                        {qualifications.map((qualified, idx) => (
-                        <div className="flex items-center">
-                            <input
-                            required
-                                
-                          class="appearance-none my-2 block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                          id="grid-password"
-                          type="text"
-                          placeholder={`Qualification ${idx+1}`}
-                          name="qualification"
-                          onChange={handleQualificationChange}
-                        />
-                        <div className="py-3 px-3 ml-4 my-2 rounded-md bg-secondary flex items-center justify-center cursor-pointer" onClick={() => handleRemoveQualification(idx)}>
-                        <Icon icon="ant-design:delete-outlined" />
+
+                    {errors && <p className="text-danger text-sm">{errors}</p>}
+                    {qualificationValues.map((element,index) => (
+
+                       <div className="flex items-center" key={index}>
+                       <input
+                       required
+                     class="appearance-none my-2 block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                     id="grid-password"
+                     type="text"
+                     placeholder={`Qualification ${index+1}`}
+                     name="qualification"
+                     onChange={e => handleQualificationChange(index ,e)}
+                     value={element.qualification || "" }
+                   />
+                   {index ? <div className="py-3 px-3 ml-4 my-2 rounded-md bg-secondary flex items-center justify-center cursor-pointer" onClick={() => removeQualificationValues(index)}>
+                   <Icon icon="ant-design:delete-outlined" />
+                   </div> : null}
+                   </div>
+                    ))}
                         </div>
-                        </div>
-                        ))}
-                        </div>
-                        <div className="py-3 px-3 ml-4 my-2 rounded-md bg-secondary flex items-center justify-center cursor-pointer" onClick={handleAddQualification}>
+                        <div className="py-3 px-3 ml-4 my-2 rounded-md bg-secondary flex items-center justify-center cursor-pointer" onClick={() => addQualificationValues()}>
                           <Icon icon="akar-icons:plus" className="text-xl" />
                         </div>
                       </div>
