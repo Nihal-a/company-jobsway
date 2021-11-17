@@ -71,7 +71,6 @@ const ReRegister = () => {
         setLoading(false)
         formData.imgUrl = data.url;
         var id = company.company._id
-        console.log(">>>>>",id);
         reregisterCompany({formData,id});
       })
       .catch((err) => {

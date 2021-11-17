@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { Link,useHistory } from "react-router-dom";
 import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
+import moment from "moment";
+import { AddNewJob, useCompanyDetails } from "../../Hooks/Company";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 
-const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',timeSchedule : '',minSalary : '',maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : ''}
+const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',timeSchedule : '',minSalary : '',maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : '' , status : false}
 
 
 
 const AddJob = () => {
   
 
+  const {mutate : AddTheJob } = AddNewJob()
+  const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+  const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
   const [qualifications, setQualifications] = useState([{ value: null }]);
   const [qualificationValues, setQualificationValues] = useState([]);
   const [languages, setLanguages] = useState([])
@@ -19,18 +25,26 @@ const AddJob = () => {
   const history = useHistory()
 
 
+
   const handleSubmit = (e) => {
       e.preventDefault()
       formData.skills = skills 
       formData.language = languages
       const num = qualifications.length
-
       formData.qualification = qualifications[num-1]
-      history.push('/job-payment' , {payment : true , formData})
+      formData.createdAt = moment().format('YYYYMMDDhmmssa')
+      var id = company.company._id
+      AddTheJob({formData , id})
     }
     const handleSkillChange = (e) => {
         var skill = e.target.value.split(',');
         setSkills(skill)
+    }
+
+    if ( isLoading ) {
+      return (
+        <LoadingSpinner />
+      );
     }
     
     const handleQualificationChange = (e) => {

@@ -10,3 +10,4 @@ export const reregister = ({formData,id}) => API.patch(`/reregister?id=${id}`,fo
 
 //company
 export const fetchCompanyDetails = (id) =>  API.get(`/company/${id}`)
+export const addJob = ({formData,id}) => API.post(`/add-job?id=${id}`,formData)
