@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
 
@@ -9,11 +9,14 @@ const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',t
 
 
 const AddJob = () => {
+  
+
   const [qualifications, setQualifications] = useState([{ value: null }]);
   const [qualificationValues, setQualificationValues] = useState([]);
   const [languages, setLanguages] = useState([])
   const [skills, setSkills] = useState([])
   const [formData, setFormData] = useState(initialState)
+  const history = useHistory()
 
 
   const handleSubmit = (e) => {
@@ -23,8 +26,7 @@ const AddJob = () => {
       const num = qualifications.length
 
       formData.qualification = qualifications[num-1]
-      console.log("formdata : ",formData);
-      // login(formData)
+      history.push('/job-payment' , {payment : true , formData})
     }
     const handleSkillChange = (e) => {
         var skill = e.target.value.split(',');
@@ -32,8 +34,7 @@ const AddJob = () => {
     }
     
     const handleQualificationChange = (e) => {
-      let i = 0 ;
-        setQualificationValues([...qualificationValues[i],e.target.value])
+        setQualificationValues([...qualificationValues,e.target.value])
     }
 
     const handleChange = (e) => {

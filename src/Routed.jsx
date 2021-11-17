@@ -9,6 +9,7 @@ import Applications from "./components/Applications/Applications";
 import Shortlist from "./components/ShortList/Shortlist";
 import Profile from "./components/Profile/Profile";
 import AddJob from "./components/Jobs/AddJob";
+import JobPayment from "./components/Jobs/JobPayment";
 
 
 const Routed = () => {
@@ -17,7 +18,7 @@ const Routed = () => {
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
-        console.log(location?.state?.reRegister);
+        console.log(location?.state);
     }, [location])
 
     return (
@@ -27,6 +28,8 @@ const Routed = () => {
           <Route exact path="/">
             {company ? <Dashboard/> : <Redirect to="/login"/>}
           </Route>
+
+
 
 
           //Auth
@@ -39,6 +42,8 @@ const Routed = () => {
           <Route path="/reregister">
             {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
+
+
 
 
           //Pages
@@ -55,6 +60,8 @@ const Routed = () => {
             {company ?  <Profile /> : <Redirect to="/login" />}
           </Route>
 
+
+
           //Subpages
           <Route path="/add-job">
             {company ?  <AddJob /> : <Redirect to="/login" />}
@@ -62,6 +69,10 @@ const Routed = () => {
           <Route path="/edit-job">
             {company ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
+          <Route path="/job-payment">
+            {(company && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
+          </Route>
+
 
 
         </Switch>
