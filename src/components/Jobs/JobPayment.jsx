@@ -14,13 +14,13 @@ const JobPayment = () => {
         <div>
             <Logo />
            <div className="container mx-auto p-5 w-full mt-10">
-           <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
+           <h5 className="text-2xl font-semibold text-dark mb-8 text-primary">
                 Select Your Payment Plan :
             </h5>
             <div className="flex justify-around items-center">
                 <PaymentCard days="3" planName="Free" amount="0" small/>
-                <PaymentCard days="10" planName="Basic" amount="12" colored popular/>
-                <PaymentCard days="30" planName="Premium" amount="20" colored small/>
+                <PaymentCard days="10" planName="Basic" amount="349" colored popular/>
+                <PaymentCard days="30" planName="Premium" amount="899" colored small/>
             </div>
 
            </div>
