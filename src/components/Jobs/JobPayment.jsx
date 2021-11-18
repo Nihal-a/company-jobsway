@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
+import { useCompanyDetails } from '../../Hooks/Company';
 import Logo from '../UI/Logo/Logo'
 import PaymentCard from '../UI/PaymentCard/PaymentCard';
 
 
+
+
+
+
+
 const JobPayment = () => {
 
+   
     const location = useLocation()
 
-    console.log(location?.state);
 
     return (
         <div>
