@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
-import { useQuery ,useMutation} from "react-query";
+import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails } from "../api";
+import { addJob, fetchCompanyDetails, verifyPayment } from "../api";
 
 
 export const useCompanyDetails = (id) => {
@@ -20,5 +20,23 @@ export const AddNewJob = () => {
             var err = error.response.data.error
             toast.error(err)
         }
+    })
+}
+
+
+export const VerifyJobPayment = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+    return useMutation(verifyPayment,{
+        onSuccess: ({data}) => {
+            // queryClient.setQueryData('company' , () => data.data)
+            // localStorage.setItem('company' , JSON.stringify(data))
+            // history.push('/')
+        },
+        onError: (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        },
     })
 }

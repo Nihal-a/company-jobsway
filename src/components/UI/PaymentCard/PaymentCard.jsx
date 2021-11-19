@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useLocation } from 'react-router-dom'
 import { Icon } from '@iconify/react';
-import { useCompanyDetails } from '../../../Hooks/Company';
-import axios from 'axios';
+import { useCompanyDetails, VerifyJobPayment } from '../../../Hooks/Company';
 import { payment } from '../../../api';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 
 const loadScript = (src) => {
@@ -26,6 +26,8 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
      const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
         const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
         const [plan, setPlan] = useState(null)
+        const {mutate : verifyPayment } = VerifyJobPayment()
+        const location = useLocation()
     
         async function displayRazorpay() {
 
@@ -34,21 +36,29 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
             
             if(!res) return alert('Razorpay SDK failed to load. Are you online ?')
             
-            const resp =await payment({amount:amount},data?.data.company._id)
+            const order =await payment({amount:amount},data?.data.company._id)
         
             const options = {
                 "key": process.env.REACT_APP_RAZORPAY_KEY_ID,
                 amount,
-                "name": {plan},
-                "currency" : resp.data.currency,
-                "amount" : resp.data.amount.toString(),
-                "description": "Thank you for choosing jobsWay.",
+                "name": data?.data.company.companyName,
+                "currency" : order.data.currency,
+                "amount" : order.data.amount.toString(),
+                "description": planName,
                 "image": "http://localhost:4000/logo.jpg",
-                "order_id": resp.data.id,
+                "order_id": order.data.id,
                 "handler": function (response){
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature)
+                    const transactionDetails = {
+                        id : company._id,
+                        companyName : company.companyName,
+                        amount,
+                        jobId:location.state.jobDetails._id,
+                        jobTitle:location.state.jobDetails.jobTitle,
+                        planName,
+                        razorpay_payment_id :response.razorpay_payment_id,
+                        razorpay_order_id :response.razorpay_order_id
+                    }
+                    verifyPayment({response , order ,transactionDetails})
                 },
                 "prefill": {
                     "name": data?.data.company.companyName,
@@ -74,6 +84,12 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
             displayRazorpay()
         }
     }
+
+    if (isLoading) {
+        return (
+          <LoadingSpinner />
+        );
+      }
     
 
     return (
