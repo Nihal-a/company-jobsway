@@ -24,9 +24,9 @@ const JobPayment = () => {
                 Select Your Payment Plan :
             </h5>
             <div className="flex justify-around items-center">
-                <PaymentCard days="3" planName="Free" amount="0" small/>
-                <PaymentCard days="10" planName="Basic" amount="349" colored popular/>
-                <PaymentCard days="30" planName="Premium" amount="899" colored small/>
+                <PaymentCard days="3" planName="Free" amount="0" small paid={false}/>
+                <PaymentCard days="10" planName="Basic" amount="349" colored popular paid/>
+                <PaymentCard days="30" planName="Premium" amount="899" colored small paid/>
             </div>
 
            </div>

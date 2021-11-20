@@ -24,7 +24,7 @@ const loadScript = (src) => {
     })
   }
 
-const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
+const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
     
      const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
         const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
@@ -34,7 +34,9 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
         const location = useLocation()
         const history = useHistory()
     
-        async function displayRazorpay() {
+        async function displayRazorpay(e) {
+
+            e.preventDefault()
 
             const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
 
@@ -85,7 +87,6 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
 
     const handleClick = (e) => {
         e.preventDefault()
-        if(amount == 0){
             swal({
                 title: "This is a Free Plan?",
                 text: "The Job will only be shown for 3 days to the users.",
@@ -103,9 +104,6 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
                   swal("Choose a paid plan You prefers.");
                 }
               });
-        }else{
-            displayRazorpay()
-        }
     }
 
     if (isLoading) {
@@ -125,7 +123,12 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
                 <div className="flex items-end"><p className="text-6xl font-semibold flex items-center"><Icon icon="bx:bx-rupee" color="black" height="54" className="p-0 m-0" color={colored && '#f8f8f8'} />{amount}</p><span className="text-secondary text-sm mb-3">/job</span></div>
                 <p className="mt-2">Jobs Show for {days} days</p>
             </div>
-            <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold" style={{backgroundColor:'#5B40FF'}} onClick={handleClick}>Select Plan</Link>
+            <div className="">
+            {!paid && <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold bg-primary" onClick={handleClick}>Select Plan</Link>}
+            {paid && <>
+                <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2" style={{backgroundColor:'#5B40FF'}} onClick={displayRazorpay}>Pay with Razorpay</Link>
+            </>}
+            </div>
         </div>
     )
 }

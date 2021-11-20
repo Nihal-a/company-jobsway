@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan} from "../api";
+import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs} from "../api";
 
 
 export const useCompanyDetails = (id) => {
@@ -50,5 +50,11 @@ export const AddFreeJob = () => {
             var err = error.response.data.error
             toast.error(err)
         },
+    })
+}
+
+export const useCompanyJobs = (id) => {
+    return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id),{
+        refetchOnMount:"always"
     })
 }
