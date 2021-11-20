@@ -29,8 +29,6 @@ const Routed = () => {
           </Route>
 
 
-
-
           //Auth
           <Route path="/login">
            {company ? <Redirect to="/" /> : <Login />}
@@ -41,8 +39,6 @@ const Routed = () => {
           <Route path="/reregister">
             {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
-
-
 
 
           //Pages
@@ -58,7 +54,6 @@ const Routed = () => {
           <Route path="/profile">
             {company ?  <Profile /> : <Redirect to="/login" />}
           </Route>
-
 
 
           //Subpages

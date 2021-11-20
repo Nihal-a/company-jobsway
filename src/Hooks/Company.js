@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails, verifyPayment } from "../api";
+import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan} from "../api";
 
 
 export const useCompanyDetails = (id) => {
@@ -13,7 +13,6 @@ export const AddNewJob = () => {
 
     return useMutation(addJob,{
         onSuccess : ({data}) => {
-            console.log("Data : ",data.job);
             history.push('/job-payment',{payment : true , jobDetails : data.job})
         },
         onError : (error) => {
@@ -29,8 +28,23 @@ export const VerifyJobPayment = () => {
     const queryClient = useQueryClient()
 
     return useMutation(verifyPayment,{
-        onSuccess: () => {
-            history.push('/jobs')
+        onSuccess: (data) => {
+            history.go('/jobs')
+            toast.success('Job Added Successfully')
+        },
+        onError: (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        },
+    })
+}
+
+export const AddFreeJob = () => {
+    const history = useHistory()
+
+    return useMutation(addFreePlan,{
+        onSuccess : () => {
+            console.log("its here fool");
         },
         onError: (error) => {
             var err = error.response.data.error

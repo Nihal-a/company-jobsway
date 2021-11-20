@@ -1,9 +1,12 @@
 import React,{useState} from 'react'
 import { Link,useLocation,useHistory } from 'react-router-dom'
 import { Icon } from '@iconify/react';
-import { useCompanyDetails, VerifyJobPayment } from '../../../Hooks/Company';
+import { AddFreeJob, useCompanyDetails, VerifyJobPayment } from '../../../Hooks/Company';
 import { payment } from '../../../api';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import swal from 'sweetalert';
+import toast from 'react-hot-toast';
+
 
 
 const loadScript = (src) => {
@@ -27,6 +30,7 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
         const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
         const [plan, setPlan] = useState(null)
         const {mutate : verifyPayment } = VerifyJobPayment()
+        const {mutate : addFreePlan } = AddFreeJob()
         const location = useLocation()
         const history = useHistory()
     
@@ -60,7 +64,8 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
                         razorpay_order_id :response.razorpay_order_id
                     }
                     verifyPayment({response , order ,transactionDetails})
-                    history.push('/')
+                    history.push('/jobs')
+                    toast.success('Job Added')
                 },
                 "prefill": {
                     "name": data?.data.company.companyName,
@@ -81,7 +86,23 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
     const handleClick = (e) => {
         e.preventDefault()
         if(amount == 0){
-            console.log("isZero",amount);
+            swal({
+                title: "This is a Free Plan?",
+                text: "The Job will only be shown for 3 days to the users.",
+                icon: "warning",
+                buttons: true,
+                buttons: ["Get Extra Features", "Proceed with Free"],
+                dangerMode: false,
+              })
+              .then((proceed) => {
+                if (proceed) {
+                    addFreePlan({jobId :location.state.jobDetails._id})
+                    history.push('/jobs')
+                    toast.success('Job Added')
+                } else {
+                  swal("Choose a paid plan You prefers.");
+                }
+              });
         }else{
             displayRazorpay()
         }
@@ -91,7 +112,7 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
         return (
           <LoadingSpinner />
         );
-      }
+    }
     
 
     return (
