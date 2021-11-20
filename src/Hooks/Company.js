@@ -29,10 +29,8 @@ export const VerifyJobPayment = () => {
     const queryClient = useQueryClient()
 
     return useMutation(verifyPayment,{
-        onSuccess: ({data}) => {
-            // queryClient.setQueryData('company' , () => data.data)
-            // localStorage.setItem('company' , JSON.stringify(data))
-            // history.push('/')
+        onSuccess: () => {
+            history.push('/jobs')
         },
         onError: (error) => {
             var err = error.response.data.error

@@ -18,7 +18,6 @@ const Routed = () => {
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
-        console.log(location?.state);
     }, [location])
 
     return (

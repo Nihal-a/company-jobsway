@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link,useLocation } from 'react-router-dom'
+import { Link,useLocation,useHistory } from 'react-router-dom'
 import { Icon } from '@iconify/react';
 import { useCompanyDetails, VerifyJobPayment } from '../../../Hooks/Company';
 import { payment } from '../../../api';
@@ -28,6 +28,7 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
         const [plan, setPlan] = useState(null)
         const {mutate : verifyPayment } = VerifyJobPayment()
         const location = useLocation()
+        const history = useHistory()
     
         async function displayRazorpay() {
 
@@ -59,6 +60,7 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days}) => {
                         razorpay_order_id :response.razorpay_order_id
                     }
                     verifyPayment({response , order ,transactionDetails})
+                    history.push('/')
                 },
                 "prefill": {
                     "name": data?.data.company.companyName,
