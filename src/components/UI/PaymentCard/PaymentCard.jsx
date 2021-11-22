@@ -8,11 +8,10 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import swal from 'sweetalert';
 import rswal from "@sweetalert/with-react"
 import toast from 'react-hot-toast';
+import {convert} from "current-currency"
 import StripeCheckout from 'react-stripe-checkout';
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
-
-
 
 
 const loadScript = (src) => {
@@ -44,30 +43,18 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
         const location = useLocation()
         const history = useHistory()
 
-        useEffect(() => {
-
-        })
-
-        window.paypal.Buttons({
-            style: {
-              layout:  'vertical',
-              color:   'blue',
-              shape:   'pill',
-              label:   'paypal'
-            }
-          }).render('#paypal-button-container');
-    
+        const [convertedAmount, setConvertedAmount] = useState(0)
         async function displayRazorpay(e) {
-
+            
             e.preventDefault()
-
+            
             const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
-
+            
             
             if(!res) return alert('Razorpay SDK failed to load. Are you online ?')
             
             const order =await payment({amount:amount},data?.data.company._id)
-        
+            
             const options = {
                 "key": process.env.REACT_APP_RAZORPAY_KEY_ID,
                 amount,
@@ -106,10 +93,14 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
             var paymantObject = new window.Razorpay(options)
             paymantObject.open()
         }
-    
-
-    const handleClick = (e) => {
-        e.preventDefault()
+        
+        
+        const handleClick = (e) => {
+            var amountConverted = convert("INR" , amount , "USD").then(({amount}) => {
+                return amount
+            })
+            console.log(amountConverted);
+            e.preventDefault()
             swal({
                 title: "This is a Free Plan?",
                 text: "The Job will only be shown for 3 days to the users.",
@@ -117,38 +108,74 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
                 buttons: true,
                 buttons: ["Get Extra Features", "Proceed with Free"],
                 dangerMode: false,
-              })
-              .then((proceed) => {
+            })
+            .then((proceed) => {
                 if (proceed) {
                     addFreePlan({jobId :location.state.jobDetails._id})
                     history.push('/jobs')
                     toast.success('Job Added')
                 } else {
-                  swal("Choose a paid plan You prefers.");
+                    swal("Choose a paid plan You prefers.");
                 }
-              });
-    }
-
-    if (isLoading) {
+            });
+        }
+        
+        if (isLoading) {
+            return (
+                <LoadingSpinner />
+                );
+            }
+            
+            
+            
+            
+            const createOrder = (data, actions) =>{
+                return actions.order.create({
+                    purchase_units: [
+                        {
+                            amount: {
+                                value: convertedAmount,
+                            },
+                        },
+                    ],
+                });
+            };
+            
+            const onApprove = (data, actions) => {
+                return actions.order.capture().then((orderData) => {
+                    console.log("orderData : ",orderData);
+                })
+            };
+            
+            const handlePaypal =  (e) => {
+                e.preventDefault()
+                convert("INR" , amount , "USD").then((res) => {
+                    const price = res.amount.toFixed(2)
+                    console.log(convertedAmount);
+                    setConvertedAmount(price)
+                    console.log(convertedAmount);
+                })
+                rswal({
+                    text: "Choose an option to your payment.",
+                    buttons: {
+                        cancel: "Close",
+                    },
+                    content:(
+                        <>
+                        <PayPalButton
+                        createOrder={(data, actions) => createOrder(data, actions)}
+                        onApprove={(data, actions) => onApprove(data, actions)}
+                        />
+                    <input id="paypal-button-container" hidden/>
+                    </>
+                )
+            })
+        }
+        
+        
+        
+            
         return (
-          <LoadingSpinner />
-        );
-    }
-
-    const handlePaypal = (e) => {
-        e.preventDefault()
-        rswal({
-            text: "Choose an option to your payment?",
-            buttons: {
-                cancel: "Close",
-            },
-            content:(
-                <PayPalButton />
-            )
-        })
-    }
-    
-    return (
         <div className={`w-3/4 m-8 h-${small ? '80' : '96'} shadow-xl rounded-xl flex flex-col justify-between p-6 ${colored && 'text-white'}`} style={!colored ? {border : '.5px solid #0A0047'} : {backgroundColor:'#0A0047'}}>
            <div className="flex justify-between items-center">
            <h4 className="font-semibold text-xl w-full">{planName}</h4>
@@ -163,6 +190,7 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
             {paid && <>
                 <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2" style={{backgroundColor:'#5B40FF'}} onClick={displayRazorpay}>Pay with Razorpay</Link>
                 <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2"  style={{backgroundColor:'#85d996'}} onClick={handlePaypal}>Pay with payPal</Link>
+                <input type="" name="" id="paaypal-button-container" hidden/>
                 {/* <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2 relative" style={{backgroundColor:'#85d996'}} to="/stripe-payment" state={{payment:true}}>
                 <StripeCheckout className="w-full absolute opacity-0" token={onToken} stripeKey={process.env.REACT_APP_STRIPE_PK_KEY}/>
                     Pay with Stripe
