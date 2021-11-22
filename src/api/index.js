@@ -15,5 +15,6 @@ export const addJob = ({formData,id}) => API.post(`/add-job?id=${id}`,formData)
 
 //payment
 export const payment = (amount,id) => API.post(`/addjobpayment?id=${id}`,amount)
+export const stripePay = (amount,id) => API.post(`/stripe-intent/${id}`,amount)
 export const verifyPayment = ({response,order,transactionDetails}) => API.post('/verify-payment',{response,order,transactionDetails})
 export const addFreePlan = (jobId) => API.post('/add-free-plan',jobId)

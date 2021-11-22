@@ -10,6 +10,10 @@ import Shortlist from "./components/ShortList/Shortlist";
 import Profile from "./components/Profile/Profile";
 import AddJob from "./components/Jobs/AddJob";
 import JobPayment from "./components/Jobs/JobPayment";
+import Stripepay from "./components/UI/Stripe/Stripepay";
+
+
+
 
 
 const Routed = () => {
@@ -66,9 +70,9 @@ const Routed = () => {
           <Route path="/job-payment">
             {(company && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
           </Route>
-
-
-
+          <Route path="/stripe-payment">
+            {company ?  <Stripepay /> : <Redirect to="/login" />}
+          </Route>
         </Switch>
     )
 }

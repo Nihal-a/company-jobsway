@@ -53,6 +53,20 @@ export const AddFreeJob = () => {
     })
 }
 
+export const PayStripe = () => {
+    const history = useHistory()
+
+    return useMutation(addFreePlan,{
+        onSuccess : () => {
+            console.log("its here fool");
+        },
+        onError: (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        },
+    })
+}
+
 export const useCompanyJobs = (id) => {
     return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id),{
         refetchOnMount:"always"

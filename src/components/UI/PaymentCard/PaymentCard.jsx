@@ -1,28 +1,38 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
+import ReactDOM from "react-dom"
 import { Link,useLocation,useHistory } from 'react-router-dom'
 import { Icon } from '@iconify/react';
 import { AddFreeJob, useCompanyDetails, VerifyJobPayment } from '../../../Hooks/Company';
 import { payment } from '../../../api';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import swal from 'sweetalert';
+import rswal from "@sweetalert/with-react"
 import toast from 'react-hot-toast';
+import StripeCheckout from 'react-stripe-checkout';
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
+
 
 
 
 const loadScript = (src) => {
+    console.log("loading script");
     return new Promise((resolve ) => {
       const script = document.createElement("script")
       script.src = src;
       script.onload = () => {
-        resolve(true)
-      }
-      script.onerror = (err) => {
+          console.log("Script load true");
+          resolve(true)
+        }
+        script.onerror = (err) => {
+          console.log("Script load err");
         console.log("Error  : ",err);
         resolve(false)
       }
       document.body.appendChild(script)
     })
   }
+
 
 const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
     
@@ -33,6 +43,19 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
         const {mutate : addFreePlan } = AddFreeJob()
         const location = useLocation()
         const history = useHistory()
+
+        useEffect(() => {
+
+        })
+
+        window.paypal.Buttons({
+            style: {
+              layout:  'vertical',
+              color:   'blue',
+              shape:   'pill',
+              label:   'paypal'
+            }
+          }).render('#paypal-button-container');
     
         async function displayRazorpay(e) {
 
@@ -111,8 +134,20 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
           <LoadingSpinner />
         );
     }
-    
 
+    const handlePaypal = (e) => {
+        e.preventDefault()
+        rswal({
+            text: "Choose an option to your payment?",
+            buttons: {
+                cancel: "Close",
+            },
+            content:(
+                <PayPalButton />
+            )
+        })
+    }
+    
     return (
         <div className={`w-3/4 m-8 h-${small ? '80' : '96'} shadow-xl rounded-xl flex flex-col justify-between p-6 ${colored && 'text-white'}`} style={!colored ? {border : '.5px solid #0A0047'} : {backgroundColor:'#0A0047'}}>
            <div className="flex justify-between items-center">
@@ -127,6 +162,11 @@ const PaymentCard = ({small ,colored,popular,planName,amount,days,paid}) => {
             {!paid && <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold bg-primary" onClick={handleClick}>Select Plan</Link>}
             {paid && <>
                 <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2" style={{backgroundColor:'#5B40FF'}} onClick={displayRazorpay}>Pay with Razorpay</Link>
+                <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2"  style={{backgroundColor:'#85d996'}} onClick={handlePaypal}>Pay with payPal</Link>
+                {/* <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2 relative" style={{backgroundColor:'#85d996'}} to="/stripe-payment" state={{payment:true}}>
+                <StripeCheckout className="w-full absolute opacity-0" token={onToken} stripeKey={process.env.REACT_APP_STRIPE_PK_KEY}/>
+                    Pay with Stripe
+                    </Link> */}
             </>}
             </div>
         </div>
