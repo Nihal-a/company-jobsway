@@ -18,7 +18,7 @@ function JobsCard({job}) {
     }
 
     useEffect(() => {
-        
+        console.log("rerednering 4");
     },[location])
 
     const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()

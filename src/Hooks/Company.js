@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs} from "../api";
+import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs, addTransaction} from "../api";
 
 
 export const useCompanyDetails = (id) => {
@@ -53,10 +53,10 @@ export const AddFreeJob = () => {
     })
 }
 
-export const PayStripe = () => {
+export const AddTransaction = () => {
     const history = useHistory()
 
-    return useMutation(addFreePlan,{
+    return useMutation(addTransaction,{
         onSuccess : () => {
             console.log("its here fool");
         },
@@ -66,6 +66,7 @@ export const PayStripe = () => {
         },
     })
 }
+
 
 export const useCompanyJobs = (id) => {
     return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id),{
