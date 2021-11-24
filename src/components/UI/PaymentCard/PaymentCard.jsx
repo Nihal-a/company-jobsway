@@ -84,7 +84,7 @@ const PaymentCard = ({
       handler: function (response) {
         const transactionDetails = {
           id: company._id,
-          companyName: company.companyName,
+          companyName: data?.data.company.companyName,
           amount,
           jobId: location.state.jobDetails._id,
           jobTitle: location.state.jobDetails.jobTitle,
@@ -148,12 +148,12 @@ const PaymentCard = ({
     });
   };
 
-  const onApprove = (data, actions) => {
+  const onApprove = (datas, actions) => {
     return actions.order.capture().then((orderData) => {
       if (orderData.status == "COMPLETED") {
         const transactionDetails = {
           id: company._id,
-          companyName: company.companyName,
+          companyName: data?.data.company.companyName,
           amount,
           jobId: location.state.jobDetails._id,
           jobTitle: location.state.jobDetails.jobTitle,
@@ -260,10 +260,16 @@ const PaymentCard = ({
               Pay with payPal
             </Link>
             <input type="" name="" id="paaypal-button-container" hidden />
-            {/* <Link className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2 relative" style={{backgroundColor:'#85d996'}} to="/stripe-payment" state={{payment:true}}>
-                <StripeCheckout className="w-full absolute opacity-0" token={onToken} stripeKey={process.env.REACT_APP_STRIPE_PK_KEY}/>
-                    Pay with Stripe
-                    </Link> */}
+            <Link
+              className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2"
+              style={{ backgroundColor: "#24a0ed" }}
+              to={{
+                pathname : "/stripe-payment" ,
+                state : planName
+              }}
+            >
+              Pay with Stripe
+            </Link>
           </>
         )}
       </div>

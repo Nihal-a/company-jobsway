@@ -5,11 +5,6 @@ import Logo from '../UI/Logo/Logo'
 import PaymentCard from '../UI/PaymentCard/PaymentCard';
 
 
-
-
-
-
-
 const JobPayment = () => {
 
    
