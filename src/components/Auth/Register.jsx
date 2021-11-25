@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory,useLocation} from "react-router-dom";
 import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
 import { RegisterCompany } from "../../Hooks/Auth";
@@ -33,15 +33,17 @@ const Register = () => {
   const [formErr, setFormErr] = useState(null);
   const { mutate: registerCompany, isLoading } = RegisterCompany();
   const history = useHistory();
+  const location = useLocation()
+
 
   const handleChange = (e) => {
     e.preventDefault();
     setformData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    setFormErr("");
-  }, [formData]);
+useEffect(() => {
+  location.state = undefined
+}, [formData])
 
   if (isLoading || loading) {
     return (
@@ -51,12 +53,12 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.phone.length < 10) return setFormErr("Phone number invalid.");
-    if (formData.password.length < 8)
-      return setFormErr("Password must need minimum 8 characters.");
-    if (formData.password !== formData.confirmPassword)
-      return setFormErr("Passwords does not match.");
-    delete formData.confirmPassword;
+    // if (formData.phone.length < 10) return setFormErr("Phone number invalid.");
+    // if (formData.password.length < 8)
+    //   return setFormErr("Password must need minimum 8 characters.");
+    // if (formData.password !== formData.confirmPassword)
+    //   return setFormErr("Passwords does not match.");
+    // delete formData.confirmPassword;
 
     const imageData = new FormData();
     imageData.append("file", image);
@@ -96,6 +98,12 @@ const Register = () => {
           <h3 className="text-3xl font-semibold mt-8 text-center">
             Register Your <span className="text-primary">Company</span>
           </h3>
+          {location?.state?.Err && <h4 className="text-md">Errors : </h4>}
+          {location?.state?.Err.map((error) => (
+            <>
+                <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
+            </>
+          ))}
           <form
             action=""
             className="flex flex-col items-start"
@@ -109,7 +117,7 @@ const Register = () => {
             </p>
             <div className="mt-3 flex justify-between w-full ">
               <input
-                required
+                
                 onChange={handleChange}
                 name="companyName"
                 type="text"
@@ -117,7 +125,7 @@ const Register = () => {
                 className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />
               <input
-                required
+                
                 onChange={handleChange}
                 name="industry"
                 type="text"
@@ -126,7 +134,7 @@ const Register = () => {
               />
             </div>
             <input
-              required
+              
               onChange={handleChange}
               name="email"
               type="email"
@@ -135,7 +143,7 @@ const Register = () => {
             />
             <div className="mt-3 flex justify-between w-full ">
               <input
-                required
+                
                 onChange={handleChange}
                 name="location"
                 type="text"
@@ -143,7 +151,7 @@ const Register = () => {
                 className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />
               <input
-                required
+                
                 onChange={handleChange}
                 name="phone"
                 type="text"
@@ -168,7 +176,7 @@ const Register = () => {
                   className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary"
                   accept="image/*"
                   onChange={handleImageChange}
-                  required
+                  
                 />
               </div>
             </div>
@@ -244,7 +252,7 @@ const Register = () => {
             </div>
             <h6 className="mt-20 font-normal">Create password : </h6>
             <input
-              required
+              
               onChange={handleChange}
               name="password"
               type="password"
@@ -252,7 +260,7 @@ const Register = () => {
               className="mt-1 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
             />
             <input
-              required
+              
               onChange={handleChange}
               name="confirmPassword"
               type="Password"
@@ -260,11 +268,11 @@ const Register = () => {
               className="mt-2 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
             />
 
-            {formErr && (
+            {/* {formErr && (
               <p className="font-md mt-1" style={{ color: "red" }}>
                 {formErr}
               </p>
-            )}
+            )} */}
 
             <div className="flex items-center justify-center w-full h-full">
               <button

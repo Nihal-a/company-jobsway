@@ -16,8 +16,8 @@ export const RegisterCompany = () => {
             history.push('/')
         },
         onError: (error) => {
-            var err = error.response.data.error
-            toast.error(err)
+            var errors = error.response.data.errors
+            history.push('/register',{Err: errors})
         },
     })
 }

@@ -73,6 +73,9 @@ const Routed = () => {
           <Route path="/stripe-payment">
             {company ?  <Stripepay /> : <Redirect to="/login" />}
           </Route>
+          <Route path="/stripe/check">
+
+          </Route>
         </Switch>
     )
 }

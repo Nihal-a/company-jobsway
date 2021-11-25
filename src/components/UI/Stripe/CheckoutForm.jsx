@@ -32,7 +32,6 @@ const CheckoutForm = () => {
             toast.success('Success')
             break;
             case "processing":
-              console.log("proddceesd");
               console.log("Your payment is processing.");
               break;
               case "requires_payment_method":
@@ -61,7 +60,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3003/jobs",
+        return_url: "http://localhost:3002/jobs",
       },
     });
 
