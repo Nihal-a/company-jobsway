@@ -11,6 +11,7 @@ import Profile from "./components/Profile/Profile";
 import AddJob from "./components/Jobs/AddJob";
 import JobPayment from "./components/Jobs/JobPayment";
 import Stripepay from "./components/UI/Stripe/Stripepay";
+import EditJobs from "./components/Jobs/EditJobs";
 
 
 
@@ -73,8 +74,8 @@ const Routed = () => {
           <Route path="/stripe-payment">
             {company ?  <Stripepay /> : <Redirect to="/login" />}
           </Route>
-          <Route path="/stripe/check">
-
+          <Route path="/editjob/:id">
+            {company ?  <EditJobs /> : <Redirect to="/login" /> }
           </Route>
         </Switch>
     )

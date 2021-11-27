@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link,useHistory } from "react-router-dom";
+import { Link,useHistory,useLocation} from "react-router-dom";
 import Logo from "../UI/Logo/Logo";
 import { Icon } from "@iconify/react";
 import moment from "moment";
@@ -23,10 +23,12 @@ const AddJob = () => {
   const [qualificationValues, setqualificationValues] = useState([{qualification : ""}])
   const [errors, setErrors] = useState('')
   const [ind, setInd] = useState(0)
+  const location = useLocation()
 
 
   useEffect(() => {
     setErrors('')
+    location.state = undefined
   }, [formData,qualificationValues])
 
 
@@ -83,12 +85,18 @@ const AddJob = () => {
 
 
   return (
-    <div>
+    <div className="p-10">
       <Logo />
       <div className="container mx-auto mt-10 max-w-screen-lg mx-auto">
         <h4 className="text-3xl font-semibold">
           Add a New <span className="text-primary">Job.</span>
         </h4>
+        {location?.state?.Err && <h4 className="text-md">Errors : </h4>}
+          {location?.state?.Err.map((error) => (
+            <>
+                <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
+            </>
+          ))}
         <div className="">
           <form
             action=""
@@ -106,7 +114,7 @@ const AddJob = () => {
                   Job Title
                 </label>
                 <input
-                required
+
                     onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
@@ -124,7 +132,7 @@ const AddJob = () => {
                   Category
                 </label>
                 <input
-                required
+
                     onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
@@ -145,7 +153,7 @@ const AddJob = () => {
                 </label>
                 <div className="flex justify-between items-center">
                   <input
-                  required
+  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
@@ -156,7 +164,7 @@ const AddJob = () => {
                   />
                   <span className="mx-4">To</span>
                   <input
-                  required
+  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
@@ -172,7 +180,7 @@ const AddJob = () => {
                 <div class="mt-2">
                   <label class="inline-flex items-center">
                     <input
-                    required
+               
                         onChange={handleChange}
                       type="radio"
                       class="form-radio"
@@ -184,7 +192,7 @@ const AddJob = () => {
                   </label>
                   <label class="inline-flex items-center ml-6">
                     <input
-                    required
+
                         onChange={handleChange}
                       type="radio"
                       class="form-radio"
@@ -205,7 +213,7 @@ const AddJob = () => {
                 </label>
                 <div className="flex justify-between items-center">
                   <input
-                  required
+  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
@@ -216,7 +224,7 @@ const AddJob = () => {
                   />
                   <span className="mx-4">To</span>
                   <input
-                  required
+  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
@@ -246,7 +254,7 @@ const AddJob = () => {
 
                        <div className="flex items-center" key={index}>
                        <input
-                       required
+
                      class="appearance-none my-2 block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                      id="grid-password"
                      type="text"
@@ -280,7 +288,7 @@ const AddJob = () => {
                   Education
                 </label>
                 <input
-                required
+
                     onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
@@ -298,7 +306,7 @@ const AddJob = () => {
                   Job Location
                 </label>
                 <input
-                required
+
                     onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
@@ -320,7 +328,7 @@ const AddJob = () => {
                   Skills
                 </label>
                 <input
-                required
+
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
@@ -338,7 +346,7 @@ const AddJob = () => {
                   Language
                 </label>
                 <input
-                required
+
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"

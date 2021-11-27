@@ -16,8 +16,8 @@ export const AddNewJob = () => {
             history.push('/job-payment',{payment : true , jobDetails : data.job})
         },
         onError : (error) => {
-            var err = error.response.data.error
-            toast.error(err)
+            var errors = error.response.data.errors
+            history.push('/add-job',{Err: errors})
         }
     })
 }
