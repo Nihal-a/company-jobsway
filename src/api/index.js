@@ -11,7 +11,6 @@ export const reregister = ({formData,id}) => API.patch(`/reregister?id=${id}`,fo
 //company
 export const fetchCompanyDetails = (id) =>  API.get(`/company/${id}`)
 export const fetchCompanyJobs = (id) =>  API.get(`/jobs/${id}`)
-export const addJob = ({formData,id}) => API.post(`/add-job?id=${id}`,formData)
 
 //payment
 export const payment = (amount,id) => API.post(`/addjobpayment?id=${id}`,amount)
@@ -20,3 +19,7 @@ export const verifyPayment = ({response,order,transactionDetails}) => API.post('
 export const addFreePlan = (jobId) => API.post('/add-free-plan',jobId)
 export const addTransaction = (transactionDetails) => API.post('/add-transaction',transactionDetails)
 export const fetchStripeIntent = (plan) => API.post('/create-payment-intent',plan)
+
+//jobs
+export const addJob = ({formData,id}) => API.post(`/add-job?id=${id}`,formData)
+export const fetchJobById = (id) =>  API.get(`/job/${id}`)
