@@ -1,11 +1,16 @@
 import toast from "react-hot-toast";
 import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs, addTransaction ,fetchJobById} from "../api";
+import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs, addTransaction ,fetchJobById, deleteJob} from "../api";
 
 
 export const useCompanyDetails = (id) => {
     return useQuery(['company' , id] , () =>  fetchCompanyDetails(id))
+}
+
+
+export const useCompanyJobs = (id) => {
+    return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id))
 }
 
 export const AddNewJob = () => {
@@ -29,7 +34,8 @@ export const VerifyJobPayment = () => {
 
     return useMutation(verifyPayment,{
         onSuccess: (data) => {
-            history.go('/jobs')
+            history.push('/jobs')
+            queryClient.invalidateQueries('jobs')
             toast.success('Job Added Successfully')
         },
         onError: (error) => {
@@ -41,10 +47,12 @@ export const VerifyJobPayment = () => {
 
 export const AddFreeJob = () => {
     const history = useHistory()
+    const queryClient = useQueryClient()
 
     return useMutation(addFreePlan,{
         onSuccess : () => {
-            console.log("its here fool");
+            queryClient.invalidateQueries('jobs')
+            history.push('/')
         },
         onError: (error) => {
             var err = error.response.data.error
@@ -55,10 +63,13 @@ export const AddFreeJob = () => {
 
 export const AddTransaction = () => {
     const history = useHistory()
+    const queryClient = useQueryClient()
+
 
     return useMutation(addTransaction,{
         onSuccess : () => {
-            console.log("its here fool");
+            queryClient.invalidateQueries('jobs')
+            history.push('/')
         },
         onError: (error) => {
             var err = error.response.data.error
@@ -68,12 +79,24 @@ export const AddTransaction = () => {
 }
 
 
-export const useCompanyJobs = (id) => {
-    return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id),{
-        refetchOnMount:"always"
-    })
-}
 
 export const UseJobDetailsId = (id) => {
     return useQuery(['job' , id] , () => fetchJobById(id))
+}
+
+export const DeleteJobById = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+    return useMutation(deleteJob,{
+        onSuccess: ({data}) => {
+            queryClient.invalidateQueries('jobs')
+            history.push('/jobs')
+            toast.success('Job Deleted')
+        },
+        onError: (error) => {
+            var err = error.response.data.error
+            toast.error(err)
+        },
+    })
 }

@@ -23,3 +23,4 @@ export const fetchStripeIntent = (plan) => API.post('/create-payment-intent',pla
 //jobs
 export const addJob = ({formData,id}) => API.post(`/add-job?id=${id}`,formData)
 export const fetchJobById = (id) =>  API.get(`/job/${id}`)
+export const deleteJob = (id) => API.delete(`/delete-job/${id}`)
