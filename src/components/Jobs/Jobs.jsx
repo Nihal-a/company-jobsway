@@ -6,9 +6,12 @@ import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
 import JobsCardWithButtons from "./JobsCardWithButtons";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import toast from "react-hot-toast";
+import {PaymentElement , useStripe , useElements} from "@stripe/react-stripe-js"
 
 
 function Jobs() {
+
   const [company, setCompany] = useState(
     JSON.parse(localStorage.getItem("company"))
   );
@@ -23,9 +26,11 @@ function Jobs() {
       <LoadingSpinner />
   }
 
+
   useEffect(() => {
     console.log("rerending 1");
   },[location])
+
 
   return (
     <div>

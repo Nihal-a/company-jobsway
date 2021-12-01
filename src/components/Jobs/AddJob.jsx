@@ -7,7 +7,7 @@ import { AddNewJob, useCompanyDetails } from "../../Hooks/Company";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 
-const initialState = { jobTitle: '', jobCategory: '' , minExp : '',maxExp : '',timeSchedule : '',minSalary : '',maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : '' , status : false}
+const initialState = { jobTitle: '', jobCategory: '' , minExp : 0 ,maxExp : '',timeSchedule : '',minSalary : 0 ,maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : '' , status : false}
 
 
 
@@ -161,6 +161,7 @@ const AddJob = () => {
                     placeholder="0"
                     min="0"
                     name="minExp"
+                    value={formData.minExp}
                   />
                   <span className="mx-4">To</span>
                   <input
@@ -221,6 +222,7 @@ const AddJob = () => {
                     placeholder="0"
                     min="1"
                     name="minSalary"
+                    value={formData.minSalary}
                   />
                   <span className="mx-4">To</span>
                   <input

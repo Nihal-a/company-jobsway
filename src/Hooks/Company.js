@@ -13,11 +13,17 @@ export const useCompanyJobs = (id) => {
     return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id))
 }
 
+export const useJobDetails = (id) => {
+    return useQuery(['job'] , () => fetchJobById(id))
+}
+
 export const AddNewJob = () => {
     const history = useHistory()
+    const queryClient = useQueryClient()
 
     return useMutation(addJob,{
         onSuccess : ({data}) => {
+            queryClient.invalidateQueries('jobs')
             history.push('/job-payment',{payment : true , jobDetails : data.job})
         },
         onError : (error) => {
@@ -78,11 +84,6 @@ export const AddTransaction = () => {
     })
 }
 
-
-
-export const UseJobDetailsId = (id) => {
-    return useQuery(['job' , id] , () => fetchJobById(id))
-}
 
 export const DeleteJobById = () => {
     const history = useHistory()
