@@ -114,8 +114,8 @@ const AddJob = () => {
                   Job Title
                 </label>
                 <input
-
-                    onChange={handleChange}
+                  
+                  onChange={handleChange}
                   class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"

@@ -166,7 +166,7 @@ useEffect(() => {
               className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "
             />
             <div className="w-full h-40 mt-4 flex items-center flex-col">
-              <img src={image} alt="no image" className="w-36 rounded-md" />
+              <img src={image} alt="no image" className="w-36 h-36 rounded-md" />
               <div className="bg-dark relative overflow-hidden h-14 mt-3 flex items-center p-3 rounded-md ">
                 <span className="text-sm text-white font-light ">
                   Upload Logo
