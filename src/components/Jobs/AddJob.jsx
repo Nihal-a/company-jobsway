@@ -24,6 +24,7 @@ const AddJob = () => {
   const [errors, setErrors] = useState('')
   const [ind, setInd] = useState(0)
   const location = useLocation()
+  const [salaryErr, setsalaryErr] = useState(false)
 
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const AddJob = () => {
 
   const handleSubmit = (e) => {
       e.preventDefault()
+      // if(formData.minSalary > formData.maxSalary) return setsalaryErr(true)
       formData.skills = skills 
       formData.language = languages
       formData.qualification = qualificationValues
@@ -212,9 +214,9 @@ const AddJob = () => {
                 >
                   Salary
                 </label>
+                {salaryErr && <p className="text-danger text-sm">Maximum Salary must be greater than Minimum Salary</p>}
                 <div className="flex justify-between items-center">
                   <input
-  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
