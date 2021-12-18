@@ -22,7 +22,6 @@ const initialState = {
   instagram: "",
   password: "",
   confirmPassword: "",
-  imgUrl: "",
 };
 
 const Register = () => {
@@ -56,18 +55,9 @@ useEffect(() => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerCompany(formData);
+    registerCompany({ companyDetails : formData , image});
   };
 
-  const handleImageChange = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
 
   return (
     <div>
