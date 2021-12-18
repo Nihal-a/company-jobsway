@@ -21,9 +21,6 @@ const initialState = {
   instagram: "",
   password: "",
   confirmPassword: "",
-  status: false,
-  imgUrl: "",
-  ban: false,
 };
 
 const ReRegister = () => {

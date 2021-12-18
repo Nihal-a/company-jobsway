@@ -126,8 +126,6 @@ const PaymentCard = ({
         addFreePlan({ jobId: location.state.jobDetails._id });
         history.push("/jobs");
         toast.success("Job Added");
-      } else {
-        swal("Choose a paid plan You prefers.");
       }
     });
   };

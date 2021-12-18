@@ -27,8 +27,6 @@ const JobsCardWithButtons = ({job}) => {
           .then((willDelete) => {
             if (willDelete) {
               deleteJob(job._id)
-            } else {
-              swal("Action Cancelled");
             }
           });
     }

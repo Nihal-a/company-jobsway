@@ -2,7 +2,7 @@ import {  useMutation, useQueryClient } from 'react-query'
 import {loginCompany, registerCompany, reregister} from '../api/index'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
-import swal from 'sweetalert'
+
 
 
 export const RegisterCompany = () => {

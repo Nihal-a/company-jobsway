@@ -22,9 +22,7 @@ const initialState = {
   instagram: "",
   password: "",
   confirmPassword: "",
-  status: false,
   imgUrl: "",
-  ban: false,
 };
 
 const Register = () => {
@@ -42,6 +40,10 @@ const Register = () => {
     setformData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    setImage(null)
+  }, [location])
+
 useEffect(() => {
   location.state = undefined
 }, [formData])
@@ -54,25 +56,7 @@ useEffect(() => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const imageData = new FormData();
-    imageData.append("file", image);
-    imageData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_NAME);
-
-    setLoading(true)
-    Axios.post(
-      `${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,
-      imageData
-    )
-      .then(({ data }) => {
-        setLoading(false)
-        formData.imgUrl = data.url;
-        registerCompany(formData);
-      })
-      .catch((err) => {
-        setLoading(false)
-        console.log("Image upload Err :", err);
-      });
+    registerCompany(formData);
   };
 
   const handleImageChange = (e) => {
@@ -157,7 +141,7 @@ useEffect(() => {
             <textarea
               onChange={handleChange}
               name="bio"
-              placeholder="About your Company"
+              placeholder="About your Company (Must be more than 20 words long)"
               className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "
             />
             <div className="w-full h-40 flex items-center flex-col">
