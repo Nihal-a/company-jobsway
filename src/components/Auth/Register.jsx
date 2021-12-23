@@ -3,7 +3,6 @@ import { Link, useHistory,useLocation} from "react-router-dom";
 import noImage from "../../assets/images/noImage.jpg";
 import Axios from "axios";
 import { RegisterCompany } from "../../Hooks/Auth";
-import toast from "react-hot-toast";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Logo from "../UI/Logo/Logo";
 import ImageInput from "../UI/ImageInput/ImageInput";
