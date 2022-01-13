@@ -80,7 +80,7 @@ const Routed = () => {
             {company ?  <EditJobs /> : <Redirect to="/login" /> }
           </Route>
 
-          {/* Hr Signup page */}
+          {/* Hr Managment */}
           <Route path="/hr-management">
             {company ?  <HrManage /> : <Redirect to="/login" /> }
           </Route>

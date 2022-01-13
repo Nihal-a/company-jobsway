@@ -23,6 +23,7 @@ const HrManage = () => {
           <LoadingSpinner />
       }
     
+      const handleChange = () => {}
     
       useEffect(() => {
 
@@ -39,18 +40,20 @@ const HrManage = () => {
             desc="Welcome Back!"
           />
           <div className="mt-12 px-8 container w-full">
-            <div className="flex w-full justify-between items-center">
-              <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
-                Hr Accounts :
-              </h5>
-              <Link to="/add-job" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
-                <p>Add New Hr </p>
+            <div className="flex w-full justify-center items-center gap-10">
+            <input required onChange={handleChange} name="name" type="text" placeholder="Hr Name" className=" text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
+              <input required onChange={handleChange} name="email" type="email" placeholder="Hr Email" className="text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
+              <Link to="/add-hr" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
+                <p>Add Hr </p>
                 <Icon icon="akar-icons:plus" className="text-xl ml-2" />
               </Link>
             </div>
 
 
-            <div className="p-3">
+            <div className="p-3 mt-8">
+            <h5 className="text-xl font-semibold text-dark m-2 text-primary">
+                HR Accounts :
+              </h5>
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full">
                         <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
