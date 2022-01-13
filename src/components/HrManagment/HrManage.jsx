@@ -5,9 +5,16 @@ import { useCompanyDetails, useCompanyJobs } from "../../Hooks/Company";
 import PageHeader from "../UI/Items/PageHeader";
 import { Icon } from "@iconify/react";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { CreateHrAccount } from "../../Hooks/hr";
 
+
+
+const initialState = { name: '', email: '' }
 
 const HrManage = () => {
+
+    const [formData, setFormData] = useState(initialState)
+    const {mutate : createHrAccount , isLoading : loading} = CreateHrAccount()
 
     const [company, setCompany] = useState(
         JSON.parse(localStorage.getItem("company"))
@@ -16,18 +23,22 @@ const HrManage = () => {
         company?.company._id
       );
     
-      const {isLoading: loading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id)
       const location = useLocation()
     
       if(isLoading || loading){
-          <LoadingSpinner />
+          return <LoadingSpinner />
       }
     
-      const handleChange = () => {}
-    
-      useEffect(() => {
+      const handleChange = (e) => {
+        e.preventDefault()
+        setFormData({...formData,[e.target.name] : e.target.value})
+    }
 
-      },[location])
+    const handleAddHr = (e) => {
+        e.preventDefault()
+        const cid = company?.company?._id
+        createHrAccount({formData , cid})
+    }
     
     
 
@@ -40,13 +51,13 @@ const HrManage = () => {
             desc="Welcome Back!"
           />
           <div className="mt-12 px-8 container w-full">
-            <div className="flex w-full justify-center items-center gap-10">
+            <div className="flex w-full justify-center items-center gap-6">
             <input required onChange={handleChange} name="name" type="text" placeholder="Hr Name" className=" text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
               <input required onChange={handleChange} name="email" type="email" placeholder="Hr Email" className="text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
-              <Link to="/add-hr" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
+              <button onClick={handleAddHr} className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
                 <p>Add Hr </p>
                 <Icon icon="akar-icons:plus" className="text-xl ml-2" />
-              </Link>
+              </button>
             </div>
 
 
