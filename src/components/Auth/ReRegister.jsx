@@ -6,6 +6,7 @@ import { RegisterCompany, ReRegisterCompany } from "../../Hooks/Auth";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Logo from "../UI/Logo/Logo";
+import ImageInput from "../UI/ImageInput/ImageInput";
 
 const initialState = {
   companyName: "",
@@ -161,21 +162,15 @@ const ReRegister = () => {
               placeholder="About your Company"
               className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "
             />
-            <div className="w-full h-40 mt-4 flex items-center flex-col">
-              <img src={image ? image : formData.imgUrl} alt="no image" className="w-36 rounded-md" />
-              <div className="bg-dark relative overflow-hidden h-14 mt-3 flex items-center p-3 rounded-md ">
-                <span className="text-sm text-white font-light ">
-                  Upload Logo
-                </span>
-                <input
-                  type="file"
-                  className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  required
-                />
+            <div className="w-full h-40 flex items-center flex-col">
+
+              <div className="w-full h-40 flex items-center flex-col mt-8">
+
+              <img src={image ? image : formData.logoUrl} alt="no image" className="w-40 h-40 rounded-md"/>
+
+              <ImageInput setImage={setImage}/>
               </div>
-            </div>
+              </div>
             <h6 className="mt-28 font-normal">Connect Social Media : </h6>
             <p className="font-light text-secondary text-sm">
               Input the links your accounts

@@ -39,7 +39,7 @@ function Login() {
             companyLogin(formData)
         }
     }
-    
+
     if(isLoading){
         return <LoadingSpinner />
     }
@@ -60,7 +60,6 @@ function Login() {
                 {loginErr && <p className="text-sm font-light mt-1" style={{color:'red'}}>{loginErr}</p> }
                 <input required onChange={handleChange} name="email" type="email" placeholder="Email" className="m-1 mt-8 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
                 <input required onChange={handleChange} name="password" type="password" placeholder="Password" className="m-1 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
-                <Link href="" className="text-sm font-light underline w-full text-right mr-14 mt-2">Forgot Password</Link>
                 <button type="submit" className="text-white text-lg bg-primary px-7 py-1 m-3 rounded-lg font-medium" style={{ color: '#fff' }}>Sign In</button>
             </form>
             <p className="mt-4 text-sm font-light">
