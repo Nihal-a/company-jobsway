@@ -13,6 +13,7 @@ import JobPayment from "./components/Jobs/JobPayment";
 import Stripepay from "./components/UI/Stripe/Stripepay";
 import EditJobs from "./components/Jobs/EditJobs";
 import HrSignUp from "./components/CompanyHr/HrSignUp";
+import HrManage from "./components/HrManagment/HrManage";
 
 
 
@@ -80,6 +81,9 @@ const Routed = () => {
           </Route>
 
           {/* Hr Signup page */}
+          <Route path="/hr-management">
+            {company ?  <HrManage /> : <Redirect to="/login" /> }
+          </Route>
           <Route path="/hr-signup-page/:token/:hrid">
             {company ?  <HrSignUp /> : <Redirect to="/login" /> }
           </Route>

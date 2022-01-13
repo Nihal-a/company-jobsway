@@ -6,8 +6,6 @@ import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
 import JobsCardWithButtons from "./JobsCardWithButtons";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
-import toast from "react-hot-toast";
-import {PaymentElement , useStripe , useElements} from "@stripe/react-stripe-js"
 
 
 function Jobs() {

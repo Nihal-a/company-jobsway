@@ -50,21 +50,24 @@ function Dashboard() {
                 <div className="w-full">
                 <PageHeader name={data?.data?.company.companyName} desc="Welcome Back!"/>
                 <div className="mt-12 px-8 container w-full">
-                    <div className="flex w-full justify-around">
+                    <div className="flex w-full justify-center">
                         <DashBoardCards number={14} data="New Applications" />
                         <DashBoardCards number={7} data="Jobs" />
                     </div>
-                    <div className="mt-10 mb-8">
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
+                    <div className="flex w-full justify-center">
+                        <DashBoardCards number={14} data="No. of HR" />
+                        <DashBoardCards number={7} data="Jobs" />
                     </div>
-        
+                    { !company && <div className="mt-10 mb-8">
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                        <TaskCompleteCard name="Nihal avulan" />
+                        <TaskCompleteCard name="John doe" />
+                    </div> }
                 </div>
             </div>
             </div>

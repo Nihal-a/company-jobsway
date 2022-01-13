@@ -6,6 +6,7 @@ import { useCompanyDetails } from '../../../Hooks/Company';
 const SideNav = () => {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+    const [hrAccount, sethrAccount] = useState(JSON.parse(localStorage.getItem('company')))
     const { data } = useCompanyDetails(company?.company._id)
 
     const logout = () => {
@@ -27,14 +28,18 @@ const SideNav = () => {
                     <Icon className="mr-3 text-xl" icon="akar-icons:credit-card" />
                     <p className="text-lg font-light">Jobs</p>
                 </Link>
-                <Link to="/applications" href="" className="nav-items flex my-3 items-center justify-start">
+                {!company && <><Link to="/applications" href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon className="mr-3 text-xl" icon="simple-line-icons:doc" />
                     <p className="text-lg font-light">Applications</p>
                 </Link>
                 <Link to="/shortlist" href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon className="mr-3 text-xl" icon="carbon:list-boxes" />
                     <p className="text-lg font-light">Shortlist</p>
-                </Link>
+                </Link></>}
+                { company && <><Link to="/hr-management" href="" className="nav-items flex my-3 items-center justify-start">
+                    <Icon className="mr-3 text-xl" icon="la:users-cog" />
+                    <p className="text-lg font-light">Hr Manage</p>
+                </Link></> }
                 <Link to="/profile" href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon className="mr-3 text-xl" icon="iconoir:profile-circled" />
                     <p className="text-lg font-light">Profile</p>
