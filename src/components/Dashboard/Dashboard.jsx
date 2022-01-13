@@ -17,13 +17,15 @@ import TaskCompleteCard from './TaskCompleteCard'
 function Dashboard() {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-    const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
+    const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id)
     const history = useHistory()
     const location = useLocation()
 
+
     if(isLoading){
-        <LoadingSpinner />
+        return <LoadingSpinner />
     }
+
     if(isError){
         console.log("Error : ",error);
     }
