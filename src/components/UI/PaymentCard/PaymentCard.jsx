@@ -14,7 +14,6 @@ import swal from "sweetalert";
 import rswal from "@sweetalert/with-react";
 import toast from "react-hot-toast";
 import { convert } from "current-currency";
-import StripeCheckout from "react-stripe-checkout";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
@@ -74,7 +73,6 @@ const PaymentCard = ({
 
     const options = {
       key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-      amount,
       name: data?.data.company.companyName,
       currency: order.data.currency,
       amount: order.data.amount.toString(),

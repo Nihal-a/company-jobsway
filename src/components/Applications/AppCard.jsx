@@ -10,7 +10,7 @@ const AppCard = () => {
       <div className="flex items-center text-xl justify-between p-5">
         <img
           src={noImage}
-          alt="Applicant Image"
+          alt="Applicant"
           className="w-24 h-24 rounded-md"
         />
         <div className="flex flex-col gap-2">

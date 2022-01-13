@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch ,Redirect,useLocation} from "react-router-dom";
+import { Route, Switch ,Redirect,useLocation} from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -12,6 +12,7 @@ import AddJob from "./components/Jobs/AddJob";
 import JobPayment from "./components/Jobs/JobPayment";
 import Stripepay from "./components/UI/Stripe/Stripepay";
 import EditJobs from "./components/Jobs/EditJobs";
+import HrSignUp from "./components/CompanyHr/HrSignUp";
 
 
 
@@ -28,13 +29,13 @@ const Routed = () => {
     return (
         <Switch>
 
-          //Main
+          {/* main */}
           <Route exact path="/">
             {company ? <Dashboard/> : <Redirect to="/login"/>}
           </Route>
 
 
-          //Auth
+          {/* Auth */}
           <Route path="/login">
            {company ? <Redirect to="/" /> : <Login />}
           </Route>
@@ -46,7 +47,7 @@ const Routed = () => {
           </Route>
 
 
-          //Pages
+          {/* Pages */}
           <Route path="/jobs">
             {company ?  <Jobs /> : <Redirect to="/login" />}
           </Route>
@@ -61,7 +62,7 @@ const Routed = () => {
           </Route>
 
 
-          //Subpages
+          {/* Subpages */}
           <Route path="/add-job">
             {company ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
@@ -76,6 +77,11 @@ const Routed = () => {
           </Route>
           <Route path="/editjob/:id">
             {company ?  <EditJobs /> : <Redirect to="/login" /> }
+          </Route>
+
+          {/* Hr Signup page */}
+          <Route path="/hr-signup-page/:token/:hrid">
+            {company ?  <HrSignUp /> : <Redirect to="/login" /> }
           </Route>
         </Switch>
     )

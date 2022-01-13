@@ -1,10 +1,9 @@
-import { QueryClientProvider, QueryClient, useQuery } from "react-query";
-import { BrowserRouter as Router,useLocation} from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { BrowserRouter as Router} from "react-router-dom";
 
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
-import { useState,useEffect } from "react";
-import Routed from "./Routed";
+import Routed from "./Routes";
 
 function App() {
 

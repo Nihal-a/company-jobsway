@@ -6,7 +6,7 @@ import { useCompanyDetails } from '../../../Hooks/Company';
 const SideNav = () => {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-    const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
+    const { data } = useCompanyDetails(company?.company._id)
 
     const logout = () => {
         localStorage.removeItem('company')
