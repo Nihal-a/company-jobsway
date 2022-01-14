@@ -1,11 +1,17 @@
 import {  useMutation, useQuery, useQueryClient } from 'react-query'
-// import {createHrAccount, fetchAllHrOfCompany, loginHrAccount} from '../api/Auth'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
 import { createHrAccount, loginHrAccount } from '../api/Auth'
-import { fetchAllHrOfCompany } from '../api/Hr'
+import { deleteHrAccount, fetchAllHrOfCompany } from '../api/Hr'
 
 
+
+
+
+
+export const useAllHrDetails = (cid) => {
+    return useQuery('All-Hr' , () =>  fetchAllHrOfCompany(cid))
+}
 
 
 export const CreateHrAccount = () => {
@@ -25,6 +31,7 @@ export const CreateHrAccount = () => {
     
 }
 
+
 export const LoginHrAccount = () => {
     const history = useHistory()
     const queryClient = useQueryClient()
@@ -43,7 +50,19 @@ export const LoginHrAccount = () => {
     
 }
 
+export const DeleteHrAccount = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
 
-export const useAllHrDetails = (cid) => {
-    return useQuery('All-Hr' , () =>  fetchAllHrOfCompany(cid))
+    return useMutation(deleteHrAccount , {
+        onSuccess : ({data}) => {
+            toast.success(data.msg)
+            queryClient.invalidateQueries(['All-Hr'])
+            history.push('/hr-management')
+        },
+        onError: (error) => {
+            toast.error("error")
+        },
+    })
+    
 }

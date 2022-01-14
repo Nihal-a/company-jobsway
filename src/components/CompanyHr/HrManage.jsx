@@ -5,7 +5,8 @@ import { useCompanyDetails, useCompanyJobs } from "../../Hooks/Company";
 import PageHeader from "../UI/Items/PageHeader";
 import { Icon } from "@iconify/react";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
-import { CreateHrAccount, useAllHrDetails } from "../../Hooks/hr";
+import { CreateHrAccount, DeleteHrAccount, useAllHrDetails } from "../../Hooks/hr";
+import swal from "sweetalert";
 
 
 
@@ -15,8 +16,7 @@ const HrManage = () => {
 
     const [formData, setFormData] = useState(initialState)
     const {mutate : createHrAccount , isLoading : loading} = CreateHrAccount()
-    
-    
+    const {mutate : deleteHrAccount } = DeleteHrAccount()
 
     const [company, setCompany] = useState(
         JSON.parse(localStorage.getItem("company"))
@@ -46,6 +46,22 @@ const HrManage = () => {
         e.preventDefault()
         const cid = company?.company?._id
         createHrAccount({formData , cid})
+    }
+
+    const handleDeleteHr = (e,hrId) => {
+        e.preventDefault()
+        swal({
+            title: "Are you sure to Delete?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+              if (willDelete) {
+                const cid = company?.company?._id
+                deleteHrAccount({hrId , cid})
+            } 
+          });
     }
     
 
@@ -107,7 +123,7 @@ const HrManage = () => {
                                     <div className="text-left font-medium text-green-500">{hr.status}</div>
                                 </td>
                                 <td className="p-2 whitespace-nowrap flex align-center justify-center">
-                                    <div className="text-lg text-center cursor-pointer"><Icon icon="ant-design:delete-outlined" height="24" color="#f24e1e" /></div>
+                                    <div onClick={(e) => handleDeleteHr(e,hr._id)} className="text-lg text-center cursor-pointer"><Icon icon="ant-design:delete-outlined" height="24" color="#f24e1e" /></div>
                                 </td>
                             </tr>
                                 )) :  <LoadingSpinner />
