@@ -1,7 +1,9 @@
 import {  useMutation, useQuery, useQueryClient } from 'react-query'
-import {createHrAccount, fetchAllHrOfCompany, loginHrAccount} from '../api'
+// import {createHrAccount, fetchAllHrOfCompany, loginHrAccount} from '../api/Auth'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
+import { createHrAccount, loginHrAccount } from '../api/Auth'
+import { fetchAllHrOfCompany } from '../api/Hr'
 
 
 

@@ -8,12 +8,12 @@ import {
   useCompanyDetails,
   VerifyJobPayment,
 } from "../../../Hooks/Company";
-import { payment } from "../../../api";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import swal from "sweetalert";
 import rswal from "@sweetalert/with-react";
 import toast from "react-hot-toast";
 import { convert } from "current-currency";
+import { payment } from "../../../api/payments";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 

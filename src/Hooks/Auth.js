@@ -1,7 +1,8 @@
 import {  useMutation, useQueryClient } from 'react-query'
-import {loginCompany, registerCompany, reregister ,loginHrAccount} from '../api'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
+import { loginCompany, loginHrAccount, registerCompany, reregister } from '../api/Auth'
+
 
 
 

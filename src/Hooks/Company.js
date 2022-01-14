@@ -1,7 +1,11 @@
 import toast from "react-hot-toast";
 import { useQuery ,useMutation, useQueryClient} from "react-query";
 import { useHistory } from "react-router-dom";
-import { addJob, fetchCompanyDetails, verifyPayment,addFreePlan ,fetchCompanyJobs, addTransaction ,fetchJobById, deleteJob} from "../api";
+import { fetchCompanyDetails, fetchCompanyJobs } from "../api/company";
+import { addJob, deleteJob, fetchJobById } from "../api/jobs";
+import { addFreePlan, addTransaction, verifyPayment } from "../api/payments";
+
+
 
 
 export const useCompanyDetails = (id) => {

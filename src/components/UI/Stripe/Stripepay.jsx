@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import { fetchStripeIntent } from '../../../api'
 import { useLocation } from 'react-router'
 import CheckoutForm from './CheckoutForm'
+import { fetchStripeIntent } from '../../../api/payments'
+
 
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK_KEY)
