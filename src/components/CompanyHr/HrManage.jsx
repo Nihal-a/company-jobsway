@@ -75,14 +75,16 @@ const HrManage = () => {
             desc="Welcome Back!"
           />
           <div className="mt-12 px-8 container w-full">
+            <form action="" onSubmit={handleAddHr}>
             <div className="flex w-full justify-center items-center gap-6">
             <input required onChange={handleChange} name="name" type="text" placeholder="Hr Name" className=" text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
               <input required onChange={handleChange} name="email" type="email" placeholder="Hr Email" className="text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
-              <button onClick={handleAddHr} className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
+              <button type="submit" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
                 <p>Add Hr </p>
                 <Icon icon="akar-icons:plus" className="text-xl ml-2" />
               </button>
             </div>
+            </form>
 
 
             <div className="p-3 mt-8">

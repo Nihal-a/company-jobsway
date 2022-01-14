@@ -25,7 +25,7 @@ export const CreateHrAccount = () => {
             history.push('/hr-management')
         },
         onError: (error) => {
-            toast.error(error)
+            toast.error(error.response.data.msg)
         },
     })
     
