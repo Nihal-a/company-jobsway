@@ -27,8 +27,7 @@ export const CreateHrAccount = () => {
         onError: (error) => {
             toast.error(error.response.data.msg)
         },
-    })
-    
+    })   
 }
 
 
