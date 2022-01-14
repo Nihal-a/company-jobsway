@@ -9,3 +9,8 @@ export const fetchAllHrOfCompany = (cid) =>  API.get(`/get-all-hr/${cid}`)
 export const deleteHrAccount = ({hrId,cid}) =>  API.delete(`/delete-hr/${cid}/${hrId}`)
 export const activateHrAccount = ({token,hrid,formData}) =>  API.patch(`/activate-hr-account/${token}/${hrid}` ,formData)
 
+
+//HrJobs
+export const fetchHrJobs = (hrId) =>  API.get(`/jobs/${hrId}`)
+
+

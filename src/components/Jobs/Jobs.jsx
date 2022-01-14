@@ -6,6 +6,7 @@ import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
 import JobsCardWithButtons from "./JobsCardWithButtons";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { useHrJobDetails } from "../../Hooks/hr";
 
 
 function Jobs() {
@@ -13,11 +14,19 @@ function Jobs() {
   const [company, setCompany] = useState(
     JSON.parse(localStorage.getItem("company"))
   );
+  const [hr, setHr] = useState(
+    JSON.parse(localStorage.getItem("hrData"))
+  );
   const { isLoading, isError, error, data } = useCompanyDetails(
-    company?.company._id
+    company?.company._id || hr?.hrDetails?.companyId
   );
 
+  
   const {isLoading: loading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id)
+
+  const { data : jobsByHr } = useHrJobDetails(hr?.hrDetails?._id)
+
+  
   const location = useLocation()
 
   if(isLoading || loading){
@@ -44,14 +53,14 @@ function Jobs() {
               <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
                 Jobs :
               </h5>
-              <Link to="/add-job" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
+              {!company && <Link to="/add-job" className="bg-success py-3 px-6 rounded-md text-white flex items-center ">
                 <p>Add New Job </p>
                 <Icon icon="akar-icons:plus" className="text-xl ml-2" />
-              </Link>
+              </Link>}
             </div>
 
             <div className="mt-8 mb-8">
-              {jobs?.data.length == 0  ? <p className="text-danger text-center text-2xl mt-4">Jobs are empty ! Add a new Job</p> : <>
+              {jobs?.data.length || jobsByHr?.data == 0  ? <p className="text-danger text-center text-2xl mt-4">Jobs are empty ! Add a new Job</p> : <>
                 {jobs?.data.map((job) => (
                   <JobsCardWithButtons job={job}/>
                 ))

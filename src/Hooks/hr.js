@@ -2,7 +2,7 @@ import {  useMutation, useQuery, useQueryClient } from 'react-query'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
 import { createHrAccount, loginHrAccount } from '../api/Auth'
-import { activateHrAccount, deleteHrAccount, fetchAllHrOfCompany } from '../api/Hr'
+import { activateHrAccount, deleteHrAccount, fetchAllHrOfCompany, fetchHrJobs } from '../api/Hr'
 
 
 
@@ -11,6 +11,10 @@ import { activateHrAccount, deleteHrAccount, fetchAllHrOfCompany } from '../api/
 
 export const useAllHrDetails = (cid) => {
     return useQuery('All-Hr' , () =>  fetchAllHrOfCompany(cid))
+}
+
+export const useHrJobDetails = (id) => {
+    return useQuery(['jobs' , id] , () =>  fetchHrJobs(id))
 }
 
 

@@ -7,15 +7,16 @@ import { AddNewJob, useCompanyDetails } from "../../Hooks/Company";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 
-const initialState = { jobTitle: '', jobCategory: '' , minExp : 0 ,maxExp : '',timeSchedule : '',minSalary : 0 ,maxSalary : '',qualification : '',education : '',jobLocation : '',skills : '',language : '' , status : false}
+const initialState = { jobTitle: '', jobCategory: '' , minExp : 0 ,maxExp : '',timeSchedule : '',minSalary : 0 ,maxSalary : '',qualification : [] ,education : '',jobLocation : '',skills : '',language : '' , status : false}
 
 
 
 const AddJob = () => {
   
-  const {mutate : AddTheJob } = AddNewJob()
+  const {mutate : AddTheJob ,isLoading : loading} = AddNewJob()
   const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-  const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id)
+  const [hr, setHr] = useState(JSON.parse(localStorage.getItem('hrData')))
+  const {isLoading , isError , error , data} = useCompanyDetails(company?.company._id || hr?.hrDetails.companyId)
   const [languages, setLanguages] = useState([])
   const [skills, setSkills] = useState([])
   const [formData, setFormData] = useState(initialState)
@@ -38,10 +39,14 @@ const AddJob = () => {
       // if(formData.minSalary > formData.maxSalary) return setsalaryErr(true)
       formData.skills = skills 
       formData.language = languages
-      formData.qualification = qualificationValues
+      const qual = qualificationValues.map((qualif) => {
+        return qualif.qualification
+      })
+      formData.qualification = qual
       formData.createdAt = moment().format('YYYYMMDDhmmssa')
-      var id = company.company._id
-      AddTheJob({formData , id})
+      var cid = hr?.hrDetails.companyId
+      var hrId = hr?.hrDetails._id
+      AddTheJob({formData , cid ,hrId})
     }
 
     const handleSkillChange = (e) => {
@@ -233,8 +238,8 @@ const AddJob = () => {
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
                     type="number"
-                    placeholder="50000"
-                    min="1"
+                    placeholder=""
+                    min="0"
                     name="maxSalary"
                   />
                 </div>

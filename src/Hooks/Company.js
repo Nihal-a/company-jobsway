@@ -27,10 +27,12 @@ export const AddNewJob = () => {
 
     return useMutation(addJob,{
         onSuccess : ({data}) => {
+            console.log("jello");
             queryClient.invalidateQueries('jobs')
             history.push('/job-payment',{payment : true , jobDetails : data.job})
         },
         onError : (error) => {
+            console.log("heiii");
             var errors = error.response.data.errors
             history.push('/add-job',{Err: errors})
         }
@@ -62,11 +64,12 @@ export const AddFreeJob = () => {
     return useMutation(addFreePlan,{
         onSuccess : () => {
             queryClient.invalidateQueries('jobs')
-            history.push('/')
+            history.push('/jobs')
         },
         onError: (error) => {
-            var err = error.response.data.error
-            toast.error(err)
+            console.log(error.response);
+            // var err = error.response.data.error
+            // toast.error(err)
         },
     })
 }

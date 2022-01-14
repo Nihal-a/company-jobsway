@@ -47,8 +47,11 @@ const PaymentCard = ({
   const [company, setCompany] = useState(
     JSON.parse(localStorage.getItem("company"))
   );
+  const [hr, setHr] = useState(
+    JSON.parse(localStorage.getItem("hrData"))
+  );
   const { isLoading, isError, error, data } = useCompanyDetails(
-    company?.company._id
+    company?.company._id || hr?.hrDetails?.companyId
   );
   const { mutate: verifyPayment } = VerifyJobPayment();
   const { mutate: addFreePlan } = AddFreeJob();
@@ -121,9 +124,12 @@ const PaymentCard = ({
       dangerMode: false,
     }).then((proceed) => {
       if (proceed) {
-        addFreePlan({ jobId: location.state.jobDetails._id });
-        history.push("/jobs");
-        toast.success("Job Added");
+        const jobId = location.state.jobDetails._id
+        const  hrId = hr?.hrDetails._id
+        const data = { jobId , hrId }
+        addFreePlan(data);
+        // history.push("/jobs");
+        // toast.success("Job Added");
       }
     });
   };
