@@ -15,6 +15,9 @@ export const loginHrAccount = (formData) => API.post('/login/hr',formData)
 export const fetchCompanyDetails = (id) =>  API.get(`/company/${id}`)
 export const fetchCompanyJobs = (id) =>  API.get(`/jobs/${id}`)
 
+//Hr
+export const fetchAllHrOfCompany = (cid) =>  API.get(`/get-all-hr/${cid}`)
+
 //payment
 export const payment = (amount,id) => API.post(`/addjobpayment?id=${id}`,amount)
 export const stripePay = (amount,id) => API.post(`/stripe-intent/${id}`,amount)

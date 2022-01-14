@@ -5,7 +5,7 @@ import { useCompanyDetails, useCompanyJobs } from "../../Hooks/Company";
 import PageHeader from "../UI/Items/PageHeader";
 import { Icon } from "@iconify/react";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
-import { CreateHrAccount } from "../../Hooks/hr";
+import { CreateHrAccount, useAllHrDetails } from "../../Hooks/hr";
 
 
 
@@ -15,15 +15,20 @@ const HrManage = () => {
 
     const [formData, setFormData] = useState(initialState)
     const {mutate : createHrAccount , isLoading : loading} = CreateHrAccount()
+    
+    
 
     const [company, setCompany] = useState(
         JSON.parse(localStorage.getItem("company"))
-      );
-      const { isLoading, isError, error, data } = useCompanyDetails(
-        company?.company._id
-      );
+        );
+        const { isLoading, isError, error, data } = useCompanyDetails(
+            company?.company._id
+            );
+
+        const { data : allHrDetails  } = useAllHrDetails(company?.company._id)
     
-      const location = useLocation()
+        
+
     
       if(isLoading || loading){
           return <LoadingSpinner />
@@ -34,13 +39,16 @@ const HrManage = () => {
         setFormData({...formData,[e.target.name] : e.target.value})
     }
 
+
+    
+
     const handleAddHr = (e) => {
         e.preventDefault()
         const cid = company?.company?._id
         createHrAccount({formData , cid})
     }
     
-    
+
 
     return (
         <div className='flex'>
@@ -84,22 +92,26 @@ const HrManage = () => {
                             </tr>
                         </thead>
                         <tbody className="text-md divide-y divide-gray-100 ">
-                            <tr >
+                            {
+                              allHrDetails?.data ? allHrDetails.data.map((hr) => (
+                                    <tr >
                                 <td className="p-2 whitespace-nowrap">
                                     <div className="flex items-center">
-                                        <div className="font-medium text-gray-800">Alex Shatov</div>
+                                        <div className="font-medium text-gray-800">{hr.name}</div>
                                     </div>
                                 </td>
                                 <td className="p-2 whitespace-nowrap">
-                                    <div className="text-left">alexshatov@gmail.com</div>
+                                    <div className="text-left">{hr.email}</div>
                                 </td>
                                 <td className="p-2 whitespace-nowrap">
-                                    <div className="text-left font-medium text-green-500">active</div>
+                                    <div className="text-left font-medium text-green-500">{hr.status}</div>
                                 </td>
                                 <td className="p-2 whitespace-nowrap flex align-center justify-center">
                                     <div className="text-lg text-center cursor-pointer"><Icon icon="ant-design:delete-outlined" height="24" color="#f24e1e" /></div>
                                 </td>
                             </tr>
+                                )) :  <LoadingSpinner />
+                            }
                         </tbody>
                     </table>
                 </div>

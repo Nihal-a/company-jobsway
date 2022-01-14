@@ -13,7 +13,7 @@ import JobPayment from "./components/Jobs/JobPayment";
 import Stripepay from "./components/UI/Stripe/Stripepay";
 import EditJobs from "./components/Jobs/EditJobs";
 import HrSignUp from "./components/CompanyHr/HrSignUp";
-import HrManage from "./components/HrManagment/HrManage";
+import HrManage from "./components/CompanyHr/HrManage";
 
 
 
