@@ -85,7 +85,7 @@ const Routed = () => {
             {company ?  <HrManage /> : <Redirect to="/login" /> }
           </Route>
           <Route path="/hr-signup-page/:token/:hrid">
-            {company ?  <HrSignUp /> : <Redirect to="/login" /> }
+            {<HrSignUp /> }
           </Route>
         </Switch>
     )

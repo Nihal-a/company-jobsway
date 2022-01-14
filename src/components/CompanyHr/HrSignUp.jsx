@@ -1,6 +1,8 @@
 import React, { useEffect,useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
+import { ActivateHrAccount } from '../../Hooks/hr'
+import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 
 const initialState = { password: '', confirmPassword: '' }
 
@@ -11,6 +13,7 @@ const HrSignUp = () => {
     const [Err, setErr] = useState('')
     const [formData, setFormData] = useState(initialState)
     const [decodedData, setDecodedData] = useState({})
+    const {mutate : activateHrAccount , isLoading } = ActivateHrAccount()
 
     useEffect(() => {
 
@@ -36,6 +39,11 @@ const HrSignUp = () => {
     const handleActivateHrAccount = (e) => {
       e.preventDefault()
       if(formData.password != formData.confirmPassword) return setErr('Passwords do not match')
+      activateHrAccount({token,hrid,formData})
+    }
+
+    if(isLoading){
+      return <LoadingSpinner />
     }
 
     return (
