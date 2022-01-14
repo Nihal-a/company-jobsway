@@ -40,23 +40,6 @@ export const LoginCompany = () => {
     })
 }
 
-export const LoginHrAccount = () => {
-    const history = useHistory()
-    const queryClient = useQueryClient()
-
-    return useMutation(loginHrAccount , {
-        onSuccess: ({data}) => {
-            queryClient.setQueryData('hrData' , () => data.data)
-            localStorage.setItem('hrData' , JSON.stringify(data))
-            history.push('/')
-        },
-        onError: (error) => {
-            var err = error.response.data.error
-            toast.error(err)
-        },
-    })
-    
-}
 
 export const ReRegisterCompany = () => {
     const history = useHistory()

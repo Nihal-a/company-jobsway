@@ -17,7 +17,8 @@ import TaskCompleteCard from './TaskCompleteCard'
 function Dashboard() {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-    const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id)
+    const [hr, setHe] = useState(JSON.parse(localStorage.getItem('hrData')))
+    const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id || hr.hrDetails.companyId)
     const history = useHistory()
     const location = useLocation()
 

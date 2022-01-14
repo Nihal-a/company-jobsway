@@ -21,6 +21,7 @@ import HrManage from "./components/CompanyHr/HrManage";
 
 const Routed = () => {
   const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
+  const [hrAccount, setHrAccount] = useState(JSON.parse(localStorage.getItem('hrData')))
     const location = useLocation()
 
     useEffect(() => {
@@ -32,52 +33,52 @@ const Routed = () => {
 
           {/* main */}
           <Route exact path="/">
-            {company ? <Dashboard/> : <Redirect to="/login"/>}
+            {company || hrAccount ? <Dashboard/> : <Redirect to="/login"/>}
           </Route>
 
 
           {/* Auth */}
           <Route path="/login">
-           {company ? <Redirect to="/" /> : <Login />}
+           {company || hrAccount ? <Redirect to="/" /> : <Login />}
           </Route>
           <Route path="/register">
-            {company ? <Redirect to="/" /> : <Register />}
+            {company || hrAccount ? <Redirect to="/" /> : <Register />}
           </Route>
           <Route path="/reregister">
-            {(company && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
+            {(company || hrAccount && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
 
 
           {/* Pages */}
           <Route path="/jobs">
-            {company ?  <Jobs /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <Jobs /> : <Redirect to="/login" />}
           </Route>
           <Route path="/applications">
-            {company ?  <Applications /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <Applications /> : <Redirect to="/login" />}
           </Route>
           <Route path="/shortlist">
-            {company ?  <Shortlist /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <Shortlist /> : <Redirect to="/login" />}
           </Route>
           <Route path="/profile">
-            {company ?  <Profile /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <Profile /> : <Redirect to="/login" />}
           </Route>
 
 
           {/* Subpages */}
           <Route path="/add-job">
-            {company ?  <AddJob /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
           <Route path="/edit-job">
-            {company ?  <AddJob /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
           <Route path="/job-payment">
-            {(company && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
+            {(company || hrAccount && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
           </Route>
           <Route path="/stripe-payment">
-            {company ?  <Stripepay /> : <Redirect to="/login" />}
+            {company || hrAccount ?  <Stripepay /> : <Redirect to="/login" />}
           </Route>
           <Route path="/editjob/:id">
-            {company ?  <EditJobs /> : <Redirect to="/login" /> }
+            {company || hrAccount ?  <EditJobs /> : <Redirect to="/login" /> }
           </Route>
 
           {/* Hr Managment */}

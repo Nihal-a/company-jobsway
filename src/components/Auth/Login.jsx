@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Link ,useLocation,useHistory} from 'react-router-dom'
 import { LoginCompany } from '../../Hooks/Auth'
+import { LoginHrAccount } from '../../Hooks/hr'
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 
 const initialState = { email: '', password: '' }
@@ -16,6 +17,7 @@ function Login() {
     const [loginErr, setLoginErr] = useState('')
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
     const [hrAccount, sethrAccount] = useState(true)
+    const {mutate : hrLogin , isLoading : loading} = LoginHrAccount()
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
@@ -34,13 +36,13 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if(hrAccount){
-            alert("This is HR")
+            hrLogin(formData)
         }else{
             companyLogin(formData)
         }
     }
 
-    if(isLoading){
+    if(isLoading || loading){
         return <LoadingSpinner />
     }
         
