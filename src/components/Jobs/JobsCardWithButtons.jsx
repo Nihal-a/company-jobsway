@@ -6,7 +6,7 @@ import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 import JobsCard from './JobsCard'
 
 
-const JobsCardWithButtons = ({job}) => {
+const JobsCardWithButtons = ({job , hrId}) => {
 
     const location = useLocation()
     const {mutate : deleteJob , isLoading} = DeleteJobById()
@@ -26,7 +26,10 @@ const JobsCardWithButtons = ({job}) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-              deleteJob(job._id)
+                const jobId = job?._id
+                console.log(jobId);
+                console.log(hrId);
+              deleteJob({jobId , hrId})
             }
           });
     }

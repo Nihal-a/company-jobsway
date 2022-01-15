@@ -13,7 +13,6 @@ function JobsCard({job}) {
     const {isLoading , isError , error , data:companyData} = useCompanyDetails(company?.company._id)
     const location = useLocation()
 
-    console.log("here job " , job.companyDetails[0]);
     if(isLoading){
         <LoadingSpinner />
     }

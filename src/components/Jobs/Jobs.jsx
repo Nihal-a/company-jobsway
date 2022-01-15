@@ -70,7 +70,7 @@ function Jobs() {
             <div className="mt-8 mb-8">
               { jobsByHr?.data.length == 0  ? <p className="text-danger text-center text-2xl mt-4">Jobs are empty ! Add a new Job</p> : <>
                 { jobsByHr?.data .map((job) => (
-                  <JobsCardWithButtons job={job}/>
+                  <JobsCardWithButtons job={job} hrId={hr?.hrDetails?._id}/>
                 ))
                 }</> }
                 
