@@ -13,8 +13,8 @@ export const useAllHrDetails = (cid) => {
     return useQuery('All-Hr' , () =>  fetchAllHrOfCompany(cid))
 }
 
-export const useHrJobDetails = (id) => {
-    return useQuery(['jobs' , id] , () =>  fetchHrJobs(id))
+export const useHrJobDetails = (id,status) => {
+    return useQuery(['jobs' , id] , () =>  fetchHrJobs(id), {enabled : status})
 }
 
 

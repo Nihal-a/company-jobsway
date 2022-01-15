@@ -18,18 +18,26 @@ function Jobs() {
     JSON.parse(localStorage.getItem("hrData"))
   );
   const { isLoading, isError, error, data } = useCompanyDetails(
-    company?.company._id || hr?.hrDetails?.companyId
+     hr?.hrDetails?.companyId || company?.company._id 
   );
 
   
-  const {isLoading: loading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id)
+  if(company){
+    var cstatus = true
+  }else{
+    var hstatus = true
+  }
 
-  const { data : jobsByHr } = useHrJobDetails(hr?.hrDetails?._id)
+  // const {isLoading: loading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id , cstatus)
+
+
+
+  const { data : jobsByHr } = useHrJobDetails(hr?.hrDetails?._id , hstatus)
 
   
   const location = useLocation()
 
-  if(isLoading || loading){
+  if(isLoading ){
       <LoadingSpinner />
   }
 
@@ -60,8 +68,8 @@ function Jobs() {
             </div>
 
             <div className="mt-8 mb-8">
-              {jobs?.data.length || jobsByHr?.data == 0  ? <p className="text-danger text-center text-2xl mt-4">Jobs are empty ! Add a new Job</p> : <>
-                {jobs?.data.map((job) => (
+              { jobsByHr?.data.length == 0  ? <p className="text-danger text-center text-2xl mt-4">Jobs are empty ! Add a new Job</p> : <>
+                { jobsByHr?.data .map((job) => (
                   <JobsCardWithButtons job={job}/>
                 ))
                 }</> }

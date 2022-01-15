@@ -13,8 +13,8 @@ export const useCompanyDetails = (id) => {
 }
 
 
-export const useCompanyJobs = (id) => {
-    return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id))
+export const useCompanyJobs = (id , company) => {
+    return useQuery(['jobs' , id] , () =>  fetchCompanyJobs(id) , {enabled : company})
 }
 
 export const useJobDetails = (id) => {

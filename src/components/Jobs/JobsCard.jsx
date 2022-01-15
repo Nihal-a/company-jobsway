@@ -13,6 +13,7 @@ function JobsCard({job}) {
     const {isLoading , isError , error , data:companyData} = useCompanyDetails(company?.company._id)
     const location = useLocation()
 
+    console.log("here job " , job.companyDetails[0]);
     if(isLoading){
         <LoadingSpinner />
     }
@@ -27,11 +28,11 @@ function JobsCard({job}) {
         <div className="w-4/5 h-62 rounded-md p-4 mt-3" style={{ backgroundColor: '#2c2c2c' }}>
             <div className="flex justify-between">
                 <Link className="flex items-center">
-                    <img src={companyData?.data.company.logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
+                    <img src={job?.companyDetails[0]?.logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
                     <div className="ml-3">
-                    <h6 className=" text-2xl font-semibold text-white">{companyData?.data.company.companyName}</h6>
+                    <h6 className=" text-2xl font-semibold text-white">{job?.companyDetails[0]?.companyName}</h6>
                     <div className="text-sm text-secondary flex items-center">
-                        <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{companyData?.data.company.location}</p>
+                        <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{job?.companyDetails[0]?.location}</p>
                     </div>
                     </div>
                 </Link>
