@@ -51,8 +51,10 @@ const PaymentCard = ({
     JSON.parse(localStorage.getItem("hrData"))
   );
   const { isLoading, isError, error, data } = useCompanyDetails(
-    company?.company._id || hr?.hrDetails?.companyId
+    hr?.hrDetails?.companyId
   );
+
+  console.log("This is the Data : " , data);
   const { mutate: verifyPayment } = VerifyJobPayment();
   const { mutate: addFreePlan } = AddFreeJob();
   const { mutate: transactionAdd } = AddTransaction();
@@ -72,7 +74,7 @@ const PaymentCard = ({
 
     if (!res) return alert("Razorpay SDK failed to load. Are you online ?");
 
-    const order = await payment({ amount: amount }, data?.data.company._id);
+    const order = await payment({ amount: amount }, hr?.hrDetails?.companyId);
 
     const options = {
       key: process.env.REACT_APP_RAZORPAY_KEY_ID,
@@ -84,8 +86,8 @@ const PaymentCard = ({
       order_id: order.data.id,
       handler: function (response) {
         const transactionDetails = {
-          id: company._id,
-          companyName: data?.data.company.companyName,
+          id: data?.data?.company?._id,
+          companyName: data?.data?.company?.companyName,
           amount,
           jobId: location.state.jobDetails._id,
           jobTitle: location.state.jobDetails.jobTitle,
@@ -96,7 +98,6 @@ const PaymentCard = ({
         };
         verifyPayment({ response, order, transactionDetails });
         history.push("/jobs");
-        toast.success("Job Added");
       },
       prefill: {
         name: data?.data.company.companyName,

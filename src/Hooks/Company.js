@@ -65,6 +65,7 @@ export const AddFreeJob = () => {
         onSuccess : () => {
             queryClient.invalidateQueries('jobs')
             history.push('/jobs')
+            toast.success("Job Added")
         },
         onError: (error) => {
             console.log(error.response);
