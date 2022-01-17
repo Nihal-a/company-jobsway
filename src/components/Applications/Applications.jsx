@@ -33,8 +33,12 @@ const Applications = () => {
               <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
                 Applications :
               </h5>
-              {
-                !loading ? <> { !appliedUsers?.data.length == 0 ? <>
+              { isLoading ? <>
+              <div className="w-full h-full flex items-center justify-center">
+              <LoadingSpinner />
+              </div>
+              </> : 
+                 <> { !appliedUsers?.data.length == 0 ? <>
                 
                 {
                   appliedUsers?.data.map((user) => (
@@ -42,7 +46,7 @@ const Applications = () => {
                   ))
                 }
                 
-                </> : <p className="texxt-danger">No Applied Users Found</p> } </> : <LoadingSpinner />
+                </> : <p className="texxt-danger">No Applied Users Found</p> } </> 
               }
           </div>
         </div>
