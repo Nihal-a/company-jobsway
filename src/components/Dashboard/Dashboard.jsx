@@ -49,7 +49,7 @@ function Dashboard() {
             <div className="flex">
                 <SideNav />
                 <div className="w-full">
-                <PageHeader name={data?.data?.company.companyName} desc="Welcome Back!"/>
+                <PageHeader name={company ? data?.data?.company.companyName : hr?.hrDetails?.name} desc="Welcome Back!"/>
                 <div className="mt-12 px-8 container w-full">
                     <div className="flex w-full justify-center">
                         <DashBoardCards number={14} data="New Applications" />

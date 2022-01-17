@@ -32,12 +32,12 @@ function Jobs() {
 
 
 
-  const { data : jobsByHr } = useHrJobDetails(hr?.hrDetails?._id , hstatus)
+  const { data : jobsByHr , isLoading : loading} = useHrJobDetails(hr?.hrDetails?._id , hstatus)
 
   
   const location = useLocation()
 
-  if(isLoading ){
+  if(isLoading || loading){
       <LoadingSpinner />
   }
 
@@ -53,7 +53,7 @@ function Jobs() {
         <SideNav />
         <div className="w-full">
           <PageHeader
-            name={data?.data?.company.companyName}
+            name={cstatus ? data?.data?.company.companyName : hr?.hrDetails?.name}
             desc="Welcome Back!"
           />
           <div className="mt-12 px-8 container w-full">
