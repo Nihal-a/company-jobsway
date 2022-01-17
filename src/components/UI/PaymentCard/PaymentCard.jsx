@@ -54,7 +54,6 @@ const PaymentCard = ({
     hr?.hrDetails?.companyId
   );
 
-  console.log("This is the Data : " , data);
   const { mutate: verifyPayment } = VerifyJobPayment();
   const { mutate: addFreePlan } = AddFreeJob();
   const { mutate: transactionAdd } = AddTransaction();
@@ -155,7 +154,7 @@ const PaymentCard = ({
     return actions.order.capture().then((orderData) => {
       if (orderData.status == "COMPLETED") {
         const transactionDetails = {
-          id: company._id,
+          id: hr?.hrDetails?.companyId,
           companyName: data?.data.company.companyName,
           amount,
           jobId: location.state.jobDetails._id,
@@ -164,7 +163,8 @@ const PaymentCard = ({
           paymnentGateWay: "paypal",
           paypal_orderData_id: orderData.id,
         };
-        transactionAdd(transactionDetails);
+        const hrId = hr?.hrDetails?._id
+        transactionAdd({transactionDetails , hrId});
         swal.close()
         history.push("/jobs");
         toast.success("Job Added");

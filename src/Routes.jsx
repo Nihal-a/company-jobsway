@@ -20,70 +20,79 @@ import HrManage from "./components/CompanyHr/HrManage";
 
 
 const Routed = () => {
-  const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-  const [hrAccount, setHrAccount] = useState(JSON.parse(localStorage.getItem('hrData')))
-    const location = useLocation()
+  const [company, setCompany] = useState(null)
+  const [hrAccount, setHrAccount] = useState(null)
+  const [loginTrue, setloginTrue] = useState(false)
+  const location = useLocation()
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
+        setHrAccount(JSON.parse(localStorage.getItem('hrData')))
+        console.log("readering");
+        if(company || hrAccount) {
+          setloginTrue(true)
+        }else if(company == null || hrAccount == null){
+          setloginTrue(false)
+        }
     }, [location])
 
+    console.log(loginTrue);
     return (
         <Switch>
 
           {/* main */}
           <Route exact path="/">
-            {company || hrAccount ? <Dashboard/> : <Redirect to="/login"/>}
+            {loginTrue ? <Dashboard/> : <Redirect to="/login"/>}
           </Route>
 
 
           {/* Auth */}
           <Route path="/login">
-           {company || hrAccount ? <Redirect to="/" /> : <Login />}
+           {loginTrue ? <Redirect to="/" /> : <Login />}
           </Route>
           <Route path="/register">
-            {company || hrAccount ? <Redirect to="/" /> : <Register />}
+            {loginTrue ? <Redirect to="/" /> : <Register />}
           </Route>
           <Route path="/reregister">
-            {(company || hrAccount && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
+            {(loginTrue && location?.state?.reRegister) ?  <ReRegister /> : <Redirect to="/" />}
           </Route>
 
 
           {/* Pages */}
           <Route path="/jobs">
-            {company || hrAccount ?  <Jobs /> : <Redirect to="/login" />}
+            {loginTrue ?  <Jobs /> : <Redirect to="/login" />}
           </Route>
           <Route path="/applications">
-            {company || hrAccount ?  <Applications /> : <Redirect to="/login" />}
+            {loginTrue ?  <Applications /> : <Redirect to="/login" />}
           </Route>
           <Route path="/shortlist">
-            {company || hrAccount ?  <Shortlist /> : <Redirect to="/login" />}
+            {loginTrue ?  <Shortlist /> : <Redirect to="/login" />}
           </Route>
           <Route path="/profile">
-            {company || hrAccount ?  <Profile /> : <Redirect to="/login" />}
+            {loginTrue ?  <Profile /> : <Redirect to="/login" />}
           </Route>
 
 
           {/* Subpages */}
           <Route path="/add-job">
-            {company || hrAccount ?  <AddJob /> : <Redirect to="/login" />}
+            {loginTrue ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
           <Route path="/edit-job">
-            {company || hrAccount ?  <AddJob /> : <Redirect to="/login" />}
+            {loginTrue ?  <AddJob /> : <Redirect to="/login" />}
           </Route>
           <Route path="/job-payment">
-            {(company || hrAccount && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
+            {(loginTrue && location?.state?.payment) ?  <JobPayment /> : <Redirect to="/login" />}
           </Route>
           <Route path="/stripe-payment">
-            {company || hrAccount ?  <Stripepay /> : <Redirect to="/login" />}
+            {loginTrue ?  <Stripepay /> : <Redirect to="/login" />}
           </Route>
           <Route path="/editjob/:id">
-            {company || hrAccount ?  <EditJobs /> : <Redirect to="/login" /> }
+            {loginTrue ?  <EditJobs /> : <Redirect to="/login" /> }
           </Route>
 
           {/* Hr Managment */}
           <Route path="/hr-management">
-            {company ?  <HrManage /> : <Redirect to="/login" /> }
+            {loginTrue ?  <HrManage /> : <Redirect to="/login" /> }
           </Route>
           <Route path="/hr-signup-page/:token/:hrid">
             {<HrSignUp /> }

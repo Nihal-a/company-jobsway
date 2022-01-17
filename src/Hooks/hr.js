@@ -41,8 +41,8 @@ export const LoginHrAccount = () => {
 
     return useMutation(loginHrAccount , {
         onSuccess: ({data}) => {
-            queryClient.setQueryData('hrData' , () => data.data)
             localStorage.setItem('hrData' , JSON.stringify(data))
+            queryClient.setQueryData('hrData' , () => data.data)
             history.push('/')
         },
         onError: (error) => {

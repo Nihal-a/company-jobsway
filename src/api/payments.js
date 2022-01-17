@@ -10,5 +10,5 @@ export const addFreePlan = ({hrId , jobId}) => API.post(`/add-free-plan/${hrId}`
 export const payment = (amount,hrId) => API.post(`/razorpay/addjobpayment/${hrId}`,amount)
 export const stripePay = (amount,id) => API.post(`/stripe-intent/${id}`,amount)
 export const verifyPayment = ({response,order,transactionDetails}) => API.post('/razorpay/verify-payment',{response,order,transactionDetails})
-export const addTransaction = (transactionDetails) => API.post('/add-transaction',transactionDetails)
+export const addTransaction = ({transactionDetails , hrId}) => API.post(`/update-job-transaction/${hrId}`,transactionDetails)
 export const fetchStripeIntent = (plan) => API.post('/create-payment-intent',plan)

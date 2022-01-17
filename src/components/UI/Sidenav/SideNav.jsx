@@ -1,18 +1,31 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Icon } from '@iconify/react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useCompanyDetails } from '../../../Hooks/Company';
+
 
 const SideNav = () => {
 
-    const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-    const [hrAccount, sethrAccount] = useState(JSON.parse(localStorage.getItem('company')))
+    const [company, setCompany] = useState(null)
+    const [hrAccount, sethrAccount] = useState(null)
     const { data } = useCompanyDetails(company?.company._id)
+    const history = useHistory()
+    const location = useLocation()
+
+    useEffect(() => {
+        setCompany(JSON.parse(localStorage.getItem('company')))
+        sethrAccount(JSON.parse(localStorage.getItem('hrData')))
+    }, [])
 
     const logout = () => {
-        localStorage.removeItem('company')
-        setCompany(null)
+            localStorage.removeItem('company')
+            setCompany(null)
+            console.log(company);
+            localStorage.removeItem('hrData')
+            sethrAccount(null)
+            history.push('/')
     }
+    
 
     return (
         <div>

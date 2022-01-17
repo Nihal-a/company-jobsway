@@ -63,8 +63,8 @@ export const AddFreeJob = () => {
 
     return useMutation(addFreePlan,{
         onSuccess : () => {
-            queryClient.invalidateQueries('jobs')
             history.push('/jobs')
+            queryClient.invalidateQueries('jobs')
             toast.success("Job Added")
         },
         onError: (error) => {
