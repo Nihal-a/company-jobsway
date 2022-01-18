@@ -12,13 +12,14 @@ const Applications = () => {
     const [hr, setHrAccount] = useState(
         JSON.parse(localStorage.getItem("hrData"))
       );
-
-      const [loading, setLoading] = useState(false)
       
       const { data : appliedUsers  , isLoading , error  } = useAppliedUsers(hr?.hrDetails?._id) 
 
+      if(isLoading){
+        return <LoadingSpinner />
+    }
 
-      console.log(appliedUsers?.data);
+
 
     return (
         <div>
@@ -33,16 +34,12 @@ const Applications = () => {
               <h5 className="text-xl font-semibold text-dark mb-8 text-primary">
                 Applications :
               </h5>
-              { isLoading ? <>
-              <div className="w-full h-full flex items-center justify-center">
-              <LoadingSpinner />
-              </div>
-              </> : 
+              {
                  <> { !appliedUsers?.data.length == 0 ? <>
                 
                 {
                   appliedUsers?.data.map((user) => (
-                    <AppCardWithButtons user={user}/>
+                    <AppCardWithButtons user={user} hr={hr?.hrDetails} />
                   ))
                 }
                 
