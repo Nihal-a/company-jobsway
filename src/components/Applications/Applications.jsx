@@ -44,7 +44,7 @@ const Applications = () => {
                   ))
                 }
                 
-                </> : <p className="texxt-danger">No Applied Users Found</p> } </> 
+                </> : <p className="text-danger">No Applied Users Found</p> } </> 
               }
           </div>
         </div>

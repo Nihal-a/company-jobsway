@@ -5,6 +5,8 @@ import PageHeader from "../UI/Items/PageHeader";
 import SideNav from "../UI/Sidenav/SideNav";
 import { Icon } from "@iconify/react";
 import ShortListCardWithButtons from "./ShortListCardWithButtons";
+import { useShortlistedUsers } from "../../Hooks/user";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 
 
@@ -13,6 +15,13 @@ function Shortlist() {
   const [hr, setHr] = useState(
     JSON.parse(localStorage.getItem("hrData"))
   );
+
+
+  const { data : shortListedUsers , isLoading } = useShortlistedUsers(hr?.hrDetails?._id)
+
+  if(isLoading) {
+    return <LoadingSpinner />
+  }
 
 
   return (
@@ -35,10 +44,11 @@ function Shortlist() {
             </div>
 
             <div className="mt-8 mb-8">
-                <ShortListCardWithButtons />
-                <ShortListCardWithButtons />
-                <ShortListCardWithButtons />
-                <ShortListCardWithButtons />
+              {
+                !shortListedUsers?.data.length == 0 ?  shortListedUsers?.data?.map((user) => (
+                  <ShortListCardWithButtons user={user}/>
+                )) : <p className="text-danger">No Applied Users Found</p>
+              }
             </div>
 
           </div>

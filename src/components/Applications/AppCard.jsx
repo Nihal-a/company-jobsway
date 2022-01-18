@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 const AppCard = ({user}) => {
 
-
   return (
     <div className="w-4/5 h-60 rounded-md p-5 mt-3 bg-secondary">
       <h4 className="text-center font-medium text-xl">{user?.applications?.firstName} {user?.applications?.lastName}</h4>
