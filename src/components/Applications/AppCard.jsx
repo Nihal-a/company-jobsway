@@ -36,7 +36,7 @@ const AppCard = ({user}) => {
           </div>
           <div className="flex items-center hover:text-primary">
           <Icon icon="iconoir:doc-star" />
-            <Link to={user?.applications?.resume} className="ml-1 underline ">Resume</Link>
+            <a target="_blank" href={user?.applications?.resumeUrl} className="ml-1 underline">Resume</a>
           </div>
           <div className="flex items-center">
           <Icon icon="uit:calender" />
