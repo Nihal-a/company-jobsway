@@ -10,12 +10,10 @@ import ShortListCardWithButtons from "./ShortListCardWithButtons";
 
 
 function Shortlist() {
-  const [company, setCompany] = useState(
-    JSON.parse(localStorage.getItem("company"))
+  const [hr, setHr] = useState(
+    JSON.parse(localStorage.getItem("hrData"))
   );
-  const { isLoading, isError, error, data } = useCompanyDetails(
-    company?.company._id
-  );
+
 
   return (
     <div>
@@ -23,7 +21,7 @@ function Shortlist() {
         <SideNav />
         <div className="w-full">
           <PageHeader
-            name={data?.data?.company.companyName}
+            name={hr?.hrDetails?.name}
             desc="Welcome Back!"
           />
           <div className="mt-12 px-8 container w-full">

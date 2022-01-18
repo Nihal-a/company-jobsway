@@ -1,7 +1,7 @@
 import swal from '@sweetalert/with-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { RejectApplicant } from '../../Hooks/user'
+import { RejectApplicant, ShortListApplicant } from '../../Hooks/user'
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 import AppCard from './AppCard'
 
@@ -9,13 +9,30 @@ import AppCard from './AppCard'
 const AppCardWithButtons = ({user , hr}) => {
 
     const {mutate : rejectApplicant , isLoading} = RejectApplicant()
+    const {mutate : shortListApplicant , isLoading : loading} = ShortListApplicant()
 
     const handleAddToShotlist = (e) => {
         e.preventDefault()
 
+        swal({
+            title: "Add to Short List?",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                const hrId = hr._id
+                const data = {
+                    jobId  : user?.applications?.jobId ,
+                    userId  : user?.applications?.userId
+                }
+                shortListApplicant({hrId , data})
+            }
+          });
     }
 
-    if(isLoading){
+    if(isLoading || loading){
         return <LoadingSpinner />
     }
 

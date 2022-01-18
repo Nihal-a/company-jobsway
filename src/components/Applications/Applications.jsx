@@ -15,6 +15,7 @@ const Applications = () => {
       
       const { data : appliedUsers  , isLoading , error  } = useAppliedUsers(hr?.hrDetails?._id) 
 
+
       if(isLoading){
         return <LoadingSpinner />
     }
