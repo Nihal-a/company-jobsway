@@ -14,3 +14,7 @@ export const activateHrAccount = ({token,hrid,formData}) =>  API.patch(`/activat
 export const fetchHrJobs = (hrId) =>  API.get(`/jobs/${hrId}`)
 
 
+//Hr Task
+export const setHrTasks = ({data , hrId}) => API.post(`/task-sets/${hrId}` , data)
+export const getTaskByHr = (hrId) => API.get(`/task/all/${hrId}`)
+

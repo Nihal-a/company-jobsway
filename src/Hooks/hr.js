@@ -2,7 +2,7 @@ import {  useMutation, useQuery, useQueryClient } from 'react-query'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
 import { createHrAccount, loginHrAccount } from '../api/Auth'
-import { activateHrAccount, deleteHrAccount, fetchAllHrOfCompany, fetchHrJobs } from '../api/Hr'
+import { activateHrAccount, deleteHrAccount, fetchAllHrOfCompany, fetchHrJobs, setHrTasks } from '../api/Hr'
 
 
 
@@ -77,6 +77,21 @@ export const ActivateHrAccount = () => {
     return useMutation(activateHrAccount , {
         onSuccess : ({data}) => {
             history.push('/login')
+        },
+        onError: (error) => {
+            toast.error(error.response.data.msg)
+        }
+    })
+}
+
+export const SetHrTask = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+    return useMutation(setHrTasks , {
+        onSuccess : ({data}) => {
+            toast.success(data.msg)
+            history.push('/shortlist')
         },
         onError: (error) => {
             toast.error(error.response.data.msg)

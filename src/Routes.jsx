@@ -14,6 +14,7 @@ import Stripepay from "./components/UI/Stripe/Stripepay";
 import EditJobs from "./components/Jobs/EditJobs";
 import HrSignUp from "./components/CompanyHr/HrSignUp";
 import HrManage from "./components/CompanyHr/HrManage";
+import SetTask from "./components/ShortList/SetTask";
 
 
 
@@ -93,6 +94,9 @@ const Routed = () => {
           {/* Hr Managment */}
           <Route path="/hr-management">
             {loginTrue ?  <HrManage /> : <Redirect to="/login" /> }
+          </Route>
+          <Route path="/set-task">
+            {loginTrue ?  <SetTask /> : <Redirect to="/login" /> }
           </Route>
           <Route path="/hr-signup-page/:token/:hrid">
             {<HrSignUp /> }
