@@ -5,6 +5,7 @@
   "proxy": "https://jobsway-company.herokuapp.com/api/v1/company/",
   "dependencies": {
     "@craco/craco": "^6.4.0",
+    "@material-tailwind/react": "0.3.4",
     "@stripe/react-stripe-js": "^1.6.0",
     "@stripe/stripe-js": "^1.21.1",
     "@sweetalert/with-react": "^0.1.1",

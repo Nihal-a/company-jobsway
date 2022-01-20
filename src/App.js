@@ -1,9 +1,9 @@
 import { QueryClientProvider, QueryClient } from "react-query";
 import { BrowserRouter as Router} from "react-router-dom";
-
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
 import Routed from "./Routes";
+import "@material-tailwind/react/tailwind.css";
 
 function App() {
 
