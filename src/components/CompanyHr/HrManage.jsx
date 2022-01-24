@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { CreateHrAccount, DeleteHrAccount, useAllHrDetails } from "../../Hooks/hr";
 import swal from "sweetalert";
+import SmallLoadingSpinner from "../UI/SmallLoading/SmallLoadingSpinner";
 
 
 
@@ -15,18 +16,25 @@ const initialState = { name: '', email: '' }
 const HrManage = () => {
 
     const [formData, setFormData] = useState(initialState)
+    const [Err, setErr] = useState(false);
     const {mutate : createHrAccount , isLoading : loading} = CreateHrAccount()
     const {mutate : deleteHrAccount } = DeleteHrAccount()
 
-    const [company, setCompany] = useState(
+        const [company, setCompany] = useState(
         JSON.parse(localStorage.getItem("company"))
         );
+
         const { isLoading, isError, error, data } = useCompanyDetails(
             company?.company._id
             );
 
         const { data : allHrDetails  } = useAllHrDetails(company?.company._id)
     
+
+        useEffect(() => {
+            setErr(false)
+        }, [formData]);
+        
         
 
     
@@ -38,13 +46,12 @@ const HrManage = () => {
         e.preventDefault()
         setFormData({...formData,[e.target.name] : e.target.value})
     }
-
-
     
 
     const handleAddHr = (e) => {
         e.preventDefault()
         const cid = company?.company?._id
+        if(formData.email.trim() == "" || formData.name.trim() == "") return setErr(true)
         createHrAccount({formData , cid})
     }
 
@@ -76,6 +83,7 @@ const HrManage = () => {
           />
           <div className="mt-12 px-8 container w-full">
             <form action="" onSubmit={handleAddHr}>
+            {Err && <p className="text-danger text-left m-2 ">Please Enter the Details</p>}
             <div className="flex w-full justify-center items-center gap-6">
             <input required onChange={handleChange} name="name" type="text" placeholder="Hr Name" className=" text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
               <input required onChange={handleChange} name="email" type="email" placeholder="Hr Email" className="text-sm w-1/4 h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
@@ -128,7 +136,7 @@ const HrManage = () => {
                                     <div onClick={(e) => handleDeleteHr(e,hr._id)} className="text-lg text-center cursor-pointer"><Icon icon="ant-design:delete-outlined" height="24" color="#f24e1e" /></div>
                                 </td>
                             </tr>
-                                )) :  <LoadingSpinner />
+                                )) :  <SmallLoadingSpinner />
                             }
                         </tbody>
                     </table>

@@ -19,7 +19,7 @@ const Profile = () => {
                 <div className="mt-12 px-8 container w-full">
                     <h5 className="text-xl font-semibold text-dark mb-8">Company Profile :</h5>
                     <div className="w-full h-40 flex items-center justify-center flex-col">
-                        <img src={data?.data.company.imgUrl} alt="Company logo" className="w-32 rounded-md shadow-xl bg-primary" />
+                        <img src={data?.data.company.logoUrl} alt="Company logo" className="w-32 rounded-md shadow-xl bg-primary" />
                         <h4 className="mt-3 text-2xl font-semibold ">{data?.data.company.companyName}</h4>
                     </div>
                     <div className="w-full h-30  mt-8 grid grid-cols-2 justify-items-center">
@@ -53,11 +53,11 @@ const Profile = () => {
                                     <h6 className="mt-2 font-light text-xl">Instagram</h6>
                                 </div>
                                 <div className="flex flex-col items-start mt-2">
-                                    <Link className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.website}</Link>
-                                    <Link className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.linkedIn}</Link>
-                                    <Link className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.facebook}</Link>
-                                    <Link className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.twitter}</Link>
-                                    <Link className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.instagram}</Link>
+                                    <a target={'_blank'} href={data?.data.company.website} className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.website}</a>
+                                    <a target={'_blank'} href={`https://www.linkedin.com/in/${data?.data.company.linkedIn}`} className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.linkedIn}</a>
+                                    <a target={'_blank'} href={`https://www.facebook.com/${data?.data.company.facebook}`} className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.facebook}</a>
+                                    <a target={'_blank'} href={`https://twitter.com/${data?.data.company.twitter}`} className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.twitter}</a>
+                                    <a target={'_blank'} href={`https://www.instagram.com/${data?.data.company.instagram}`} className="underline mt-2 font-medium text-xl ml-8">{data?.data.company.instagram}</a>
                                 </div>
                             </div>
                         </div>

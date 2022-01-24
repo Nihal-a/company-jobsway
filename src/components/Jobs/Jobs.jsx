@@ -17,9 +17,7 @@ function Jobs() {
   const [hr, setHr] = useState(
     JSON.parse(localStorage.getItem("hrData"))
   );
-  const { isLoading, isError, error, data } = useCompanyDetails(
-     hr?.hrDetails?.companyId || company?.company._id 
-  );
+  const { isLoading, isError, error, data } = useCompanyDetails(hr?.hrDetails?.companyId || company?.company._id );
 
   
   if(company){
