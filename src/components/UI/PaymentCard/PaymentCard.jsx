@@ -263,16 +263,6 @@ const PaymentCard = ({
               Pay with payPal
             </Link>
             <input type="" name="" id="paaypal-button-container" hidden />
-            <Link
-              className="bg-primary w-full rounded-md h-10 flex items-center justify-center text-white font-semibold mt-2"
-              style={{ backgroundColor: "#24a0ed" }}
-              to={{
-                pathname : "/stripe-payment" ,
-                state : planName
-              }}
-            >
-              Pay with Stripe
-            </Link>
           </>
         )}
       </div>

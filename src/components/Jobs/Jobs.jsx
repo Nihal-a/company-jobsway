@@ -26,23 +26,23 @@ function Jobs() {
     var hstatus = true
   }
 
-  // const {isLoading: loading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id , cstatus)
-
+  // const {isLoading: jobloading , isError :isJobError , error : jobError , data:jobs } = useCompanyJobs(data?.data.company._id , cstatus)
 
 
   const { data : jobsByHr , isLoading : loading} = useHrJobDetails(hr?.hrDetails?._id , hstatus)
 
   
   const location = useLocation()
-
-  if(isLoading || loading){
-      <LoadingSpinner />
-  }
-
-
+  
   useEffect(() => {
     console.log("rerending 1");
   },[location])
+
+  // if(isLoading || loading || jobloading){
+  //     return <LoadingSpinner />
+  // }
+
+
 
 
   return (

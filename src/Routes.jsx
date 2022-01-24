@@ -15,6 +15,7 @@ import EditJobs from "./components/Jobs/EditJobs";
 import HrSignUp from "./components/CompanyHr/HrSignUp";
 import HrManage from "./components/CompanyHr/HrManage";
 import SetTask from "./components/ShortList/SetTask";
+import CompanyJobs from "./components/Jobs/CompanyJobs";
 
 
 
@@ -62,6 +63,9 @@ const Routed = () => {
           {/* Pages */}
           <Route path="/jobs">
             {loginTrue ?  <Jobs /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/company/jobs">
+            {loginTrue ?  <CompanyJobs /> : <Redirect to="/login" />}
           </Route>
           <Route path="/applications">
             {loginTrue ?  <Applications /> : <Redirect to="/login" />}

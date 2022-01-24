@@ -37,7 +37,7 @@ const SideNav = () => {
                     <Icon icon="akar-icons:home" className="mr-3 text-xl" />
                     <p className="text-lg font-light">Dashboard</p>
                 </Link>
-                <Link to="/jobs" href="" className="nav-items flex my-3 items-center justify-start">
+                <Link to={company ? `/company/jobs` : `/jobs`} href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon className="mr-3 text-xl" icon="akar-icons:credit-card" />
                     <p className="text-lg font-light">Jobs</p>
                 </Link>
