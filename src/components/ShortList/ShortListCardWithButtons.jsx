@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react/cjs/react.development'
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 import { useHrTasks } from '../../Hooks/hr'
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from '@material-tailwind/react'
+import { AssignTaskToUser } from '../../Hooks/user'
 
 
 const ShortListCardWithButtons = ({user}) => {
@@ -26,12 +27,19 @@ const ShortListCardWithButtons = ({user}) => {
          
     
       const {data : hrTasks , isLoading } = useHrTasks(hr?.hrDetails?._id)
+      const {mutate : assignTaskToUser , isLoading : loading} = AssignTaskToUser()
 
+
+      useEffect(() => {
+      setShowModal(false)
+      }, []);
+      
     
 
       useEffect(() => {
 
       }, [formData]);
+
       
 
       const handleChange = (e) => {
@@ -45,11 +53,12 @@ const ShortListCardWithButtons = ({user}) => {
           taskQuestions : formData ,
           time,
           userId : user?.applications?.userId,
-          hrId : hr?.hrDetails?._id ,
+          jobId : user?.applications?.jobId,
           companyId : hr?.hrDetails?.companyId ,
           submitType : "URL"
         }
-        console.log(data);
+        const hrId =  hr?.hrDetails?._id 
+        assignTaskToUser({hrId,data})
     }
 
     const handleButtonClick= (e , num) => {

@@ -47,7 +47,7 @@ function Shortlist() {
               {
                 !shortListedUsers?.data.length == 0 ?  shortListedUsers?.data?.map((user) => (
                   <ShortListCardWithButtons user={user}/>
-                )) : <p className="text-danger">No Applied Users Found</p>
+                )) : <p className="text-danger">No Shortlisted Users Found</p>
               }
             </div>
 

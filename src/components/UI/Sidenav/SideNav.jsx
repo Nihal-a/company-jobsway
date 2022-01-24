@@ -17,13 +17,13 @@ const SideNav = () => {
         sethrAccount(JSON.parse(localStorage.getItem('hrData')))
     }, [])
 
-    const logout = () => {
-            localStorage.removeItem('company')
-            setCompany(null)
-            console.log(company);
-            localStorage.removeItem('hrData')
-            sethrAccount(null)
-            history.push('/')
+    const logout = async() => {
+        sethrAccount(null)
+        setCompany(null)
+        await localStorage.removeItem('company')
+        await localStorage.removeItem('hrData')
+        console.log("wow" , company);
+        history.push('/')
     }
     
 
@@ -53,10 +53,10 @@ const SideNav = () => {
                     <Icon className="mr-3 text-xl" icon="la:users-cog" />
                     <p className="text-lg font-light">Hr Manage</p>
                 </Link></> }
-                <Link to="/profile" href="" className="nav-items flex my-3 items-center justify-start">
+                {company && <Link to="/profile" href="" className="nav-items flex my-3 items-center justify-start">
                     <Icon className="mr-3 text-xl" icon="iconoir:profile-circled" />
                     <p className="text-lg font-light">Profile</p>
-                </Link>
+                </Link>}
                 <Link to="/" href="" className="nav-items flex my-3 items-center justify-start" onClick={logout}>
                     <Icon className="mr-3 text-xl" icon="simple-line-icons:logout" />
                     <p className="text-lg font-light">Logout</p>

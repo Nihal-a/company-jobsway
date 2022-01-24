@@ -92,7 +92,7 @@ const AddJob = () => {
 
 
   return (
-    <div className="p-10">
+    <div className="p-5">
       <Logo />
       <div className="container mx-auto mt-10 max-w-screen-lg mx-auto">
         <h4 className="text-3xl font-semibold">
@@ -121,9 +121,8 @@ const AddJob = () => {
                   Job Title
                 </label>
                 <input
-                  
                   onChange={handleChange}
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   name="jobTitle"
@@ -139,9 +138,8 @@ const AddJob = () => {
                   Category
                 </label>
                 <input
-
                     onChange={handleChange}
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
@@ -150,8 +148,8 @@ const AddJob = () => {
                 {/* <p class="text-red-500 text-xs italic">Please fill out this field.</p> */}
               </div>
             </div>
-            <div className="mt-6 flex justify-between w-full ">
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+            <div className="mt-6 flex justify-between w-full items-center">
+              <div class="w-1/3 md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
                   class="block uppercase tracking-wide text-gray-700 text-xs  mb-2"
                   for="grid-city"
@@ -160,7 +158,6 @@ const AddJob = () => {
                 </label>
                 <div className="flex justify-between items-center">
                   <input
-  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
@@ -172,19 +169,18 @@ const AddJob = () => {
                   />
                   <span className="mx-4">To</span>
                   <input
-  
                     onChange={handleChange}
                     class="appearance-none block w-1/2 bg-secondary text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-city"
                     type="number"
-                    placeholder="1"
+                    placeholder=""
                     min="1"
                     name="maxExp"
                   />
                 </div>
               </div>
-              <div class="mt-4">
-                <span class="text-gray-700">Time</span>
+              <div class="mt-4 w-1/3 flex flex-col items-center">
+                  <span class="text-gray-700 text-xs">TIME SCHEDULE :</span>
                 <div class="mt-2">
                   <label class="inline-flex items-center">
                     <input
@@ -212,7 +208,7 @@ const AddJob = () => {
                   </label>
                 </div>
               </div>
-              <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <div class="w-1/3 md:w-1/3 px-3 mb-6 md:mb-0">
                 <label
                   class="block uppercase tracking-wide text-gray-700 text-xs  mb-2"
                   for="grid-city"
@@ -264,7 +260,7 @@ const AddJob = () => {
                        <div className="flex items-center" key={index}>
                        <input
 
-                     class="appearance-none my-2 block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                     class="appearance-none my-2 block w-full bg-secondary text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                      id="grid-password"
                      type="text"
                      placeholder={`Qualification ${index+1}`}
@@ -299,7 +295,7 @@ const AddJob = () => {
                 <input
 
                     onChange={handleChange}
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
@@ -317,7 +313,7 @@ const AddJob = () => {
                 <input
 
                     onChange={handleChange}
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder=""
@@ -338,7 +334,7 @@ const AddJob = () => {
                 </label>
                 <input
 
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder="Separated by Coma.."
@@ -356,7 +352,7 @@ const AddJob = () => {
                 </label>
                 <input
 
-                  class="appearance-none block w-full bg-secondary text-gray-700 border border-0 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  class="appearance-none block w-full bg-secondary text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
                   placeholder="Separated by Coma.."

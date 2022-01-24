@@ -17,7 +17,7 @@ import TaskCompleteCard from './TaskCompleteCard'
 function Dashboard() {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
-    const [hr, setHe] = useState(JSON.parse(localStorage.getItem('hrData')))
+    const [hr, setHr] = useState(JSON.parse(localStorage.getItem('hrData')))
     const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id || hr.hrDetails.companyId)
     const history = useHistory()
     const location = useLocation()
@@ -63,11 +63,6 @@ function Dashboard() {
                         <TaskCompleteCard name="Nihal avulan" />
                         <TaskCompleteCard name="John doe" />
                         <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
-                        <TaskCompleteCard name="Nihal avulan" />
-                        <TaskCompleteCard name="John doe" />
                     </div> }
                 </div>
             </div>
@@ -75,7 +70,7 @@ function Dashboard() {
         </>
         : 
         data?.data.company.status == false ? <UnverifiedCompany /> :  <div className="flex flex-col items-center justify-center"><h2 className="text-2xl mt-4 text-center font-semibold" style={{color:'red'}}>Your Company has been Rejected.</h2>
-        <h6 className="text-md">Check the reasons for rejetion and try to reapply, All the best.</h6>
+        <h6 className="text-md">Check the reasons for rejetion and try to re-apply, All the best.</h6>
         <p className="text-center mt-6 text-md font-medium " style={{ color: 'red' }}>Reasons : <br /> {data?.data.company?.reason}</p>
         <Link onClick={handleReRegister} className="underline text-sm mt-8 text-primary ">Re-register company</Link> </div>}
         </>

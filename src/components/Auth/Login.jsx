@@ -21,7 +21,7 @@ function Login() {
 
     useEffect(() => {
         setCompany(JSON.parse(localStorage.getItem('company')))
-    }, [location])
+    }, [])
 
     const handleChangeCompany = (e) => {
         e.preventDefault()
@@ -33,6 +33,8 @@ function Login() {
         e.preventDefault()
         setFormData({...formData,[e.target.name] : e.target.value})
     }
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
         if(hrAccount){

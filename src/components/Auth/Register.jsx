@@ -119,10 +119,9 @@ useEffect(() => {
                 className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />
               <input
-                
                 onChange={handleChange}
                 name="phone"
-                type="text"
+                type="tel"
                 placeholder="Phone"
                 className="ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />

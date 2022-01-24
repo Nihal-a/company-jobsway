@@ -9,8 +9,8 @@ const UnverifiedCompany = () => {
 
     const handleLogin =  (e) => {
         e.preventDefault()
-            localStorage.removeItem('company')
-            history.push('/')
+        localStorage.removeItem('company')
+        history.push('/')
     }
     
 

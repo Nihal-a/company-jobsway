@@ -1,7 +1,8 @@
 import {  useMutation, useQuery, useQueryClient } from 'react-query'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
-import { fetchAppliedUsers, fetchShortListedUsers, rejectApplicant, shortListApplicant } from '../api/user'
+import { assignTasktoUser, fetchAppliedUsers, fetchShortListedUsers, rejectApplicant, shortListApplicant } from '../api/user'
+import swal from 'sweetalert'
 
 
 
@@ -43,6 +44,23 @@ export const ShortListApplicant = () => {
         },
         onError : (error) => {
             toast.error("Something went wrong.")
+        }
+    })
+}
+
+export const AssignTaskToUser = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+
+    return useMutation(assignTasktoUser , {
+        onSuccess : ({data}) => {
+            history.push('/shortlist')
+            toast.success(data.msg)
+            swal.close()
+        },
+        onError : (error) => {
+            toast.error(error.response.data.msg)
         }
     })
 }
