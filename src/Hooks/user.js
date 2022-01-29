@@ -15,8 +15,8 @@ export const useShortlistedUsers = (hrId) => {
 }
 
 
-export const useTaskCompletedUsers = (hrId) => {
-    return useQuery(['taskCompletedUsers'] , () =>  fetchDashboardDetails(hrId))
+export const useTaskCompletedUsers = (hrId , hstatus) => {
+    return useQuery(['taskCompletedUsers'] , () =>  fetchDashboardDetails(hrId) , { enabled : hstatus })
 }
 
 

@@ -17,8 +17,9 @@ function Dashboard() {
 
     const [company, setCompany] = useState(JSON.parse(localStorage.getItem('company')))
     const [hr, setHr] = useState(JSON.parse(localStorage.getItem('hrData')))
-    const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id || hr.hrDetails.companyId)
-    const {data: taskCompletedData , isLoading : loading} = useTaskCompletedUsers(hr.hrDetails.companyId)
+    const [hstatus, sethstatus] = useState(hr == null ? false : true);
+    const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id || hr?.hrDetails.companyId)
+    const {data: taskCompletedData , isLoading : loading} = useTaskCompletedUsers(hr?.hrDetails?.companyId , hstatus)
     const history = useHistory()
     const location = useLocation()
 
@@ -52,14 +53,14 @@ function Dashboard() {
                 <div className="w-full">
                 <PageHeader name={company ? data?.data?.company.companyName : hr?.hrDetails?.name} desc="Welcome Back!"/>
                 <div className="mt-12 px-8 container w-full">
-                    {/* <div className="flex w-full justify-center">
+                    {company && <><div className="flex w-full justify-center">
                         <DashBoardCards number={14} data="New Applications" />
                         <DashBoardCards number={7} data="Jobs" />
                     </div>
                     <div className="flex w-full justify-center">
                         <DashBoardCards number={14} data="No. of HR" />
                         <DashBoardCards number={7} data="Jobs" />
-                    </div> */}
+                    </div></>}
                     { !company && <div className="mt-10 mb-8">
                         {
                             !taskCompletedData.data.length == 0 ? taskCompletedData.data.map((user) => (
