@@ -1,7 +1,7 @@
 import {  useMutation, useQuery, useQueryClient } from 'react-query'
 import {useHistory} from "react-router-dom"
 import toast from 'react-hot-toast'
-import { assignTasktoUser, fetchAppliedUsers, fetchShortListedUsers, rejectApplicant, shortListApplicant } from '../api/user'
+import { approveTaskCompleted, assignTasktoUser, fetchAppliedUsers, fetchDashboardDetails, fetchShortListedUsers, fetchTaskCompletedUsers, rejectApplicant, rejectCompletedTask, shortListApplicant } from '../api/user'
 import swal from 'sweetalert'
 
 
@@ -12,6 +12,11 @@ export const useAppliedUsers = (hrId) => {
 
 export const useShortlistedUsers = (hrId) => {
     return useQuery(['shortListedUsers'] , () =>  fetchShortListedUsers(hrId))
+}
+
+
+export const useTaskCompletedUsers = (hrId) => {
+    return useQuery(['taskCompletedUsers'] , () =>  fetchDashboardDetails(hrId))
 }
 
 
@@ -58,6 +63,39 @@ export const AssignTaskToUser = () => {
             history.push('/shortlist')
             toast.success(data.msg)
             swal.close()
+        },
+        onError : (error) => {
+            toast.error(error.response.data.msg)
+        }
+    })
+}
+
+
+export const RejectCompletedTask = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+
+    return useMutation(rejectCompletedTask , {
+        onSuccess : ({data}) => {
+            queryClient.invalidateQueries(['taskCompletedUsers'])
+            toast.success(data.msg)
+        },
+        onError : (error) => {
+            toast.error(error.response.data.msg)
+        }
+    })
+}
+
+export const ApproveTaskCompleted = () => {
+    const history = useHistory()
+    const queryClient = useQueryClient()
+
+
+    return useMutation(approveTaskCompleted , {
+        onSuccess : ({data}) => {
+            queryClient.invalidateQueries(['taskCompletedUsers'])
+            toast.success(data.msg)
         },
         onError : (error) => {
             toast.error(error.response.data.msg)

@@ -32,9 +32,9 @@ const AppCardWithButtons = ({user , hr}) => {
           });
     }
 
-    if(isLoading || loading){
-        return <LoadingSpinner />
-    }
+    // if(isLoading || loading){
+    //     return <LoadingSpinner />
+    // }
 
     const handleRejectApplication = (e) => {
         e.preventDefault()

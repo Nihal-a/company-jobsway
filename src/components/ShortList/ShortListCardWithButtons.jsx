@@ -22,8 +22,8 @@ const ShortListCardWithButtons = ({user}) => {
      const [selected, setSelected] = useState(null);
      
      const [hr, setHr] = useState(
-         JSON.parse(localStorage.getItem("hrData"))
-         );
+        JSON.parse(localStorage.getItem("hrData"))
+     );
          
     
       const {data : hrTasks , isLoading } = useHrTasks(hr?.hrDetails?._id)
@@ -58,6 +58,7 @@ const ShortListCardWithButtons = ({user}) => {
           submitType : "URL"
         }
         const hrId =  hr?.hrDetails?._id 
+        setShowModal(false)
         assignTaskToUser({hrId,data})
     }
 
@@ -109,12 +110,6 @@ const ShortListCardWithButtons = ({user}) => {
 
     return (
         <>
-        <div className="flex items-center justify-around">
-            <AppCard user={user}/>
-            <div className="flex flex-col justify-between ">
-                <button onClick={(e) => handleAssignTask(e)} className="py-3 px-6 rounded-md text-white bg-primary mb-2">Assign Task </button>
-            </div>
-        </div>
         {
             showModal ? <>
             <Modal size="regular" active={showModal} toggler={() => setShowModal(false)}>
@@ -146,7 +141,12 @@ const ShortListCardWithButtons = ({user}) => {
                     </form>
                 </ModalBody>
             </Modal>
-            </> : null
+            </> :   <div className="flex items-center justify-around">
+            <AppCard user={user}/>
+            <div className="flex flex-col justify-between ">
+                <button onClick={(e) => handleAssignTask(e)} className="py-3 px-6 rounded-md text-white bg-primary mb-2">Assign Task </button>
+            </div>
+        </div>
         }
         </>
     )
