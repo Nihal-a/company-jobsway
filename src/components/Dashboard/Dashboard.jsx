@@ -19,7 +19,7 @@ function Dashboard() {
     const [hr, setHr] = useState(JSON.parse(localStorage.getItem('hrData')))
     const [hstatus, sethstatus] = useState(hr == null ? false : true);
     const { isLoading ,isError , error , data} = useCompanyDetails(company?.company._id || hr?.hrDetails.companyId)
-    const {data: taskCompletedData , isLoading : loading} = useTaskCompletedUsers(hr?.hrDetails?.companyId , hstatus)
+    const {data: taskCompletedData , isLoading : loading} = useTaskCompletedUsers(hr?.hrDetails?._id , hstatus)
     const history = useHistory()
     const location = useLocation()
 

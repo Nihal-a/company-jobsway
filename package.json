@@ -2,7 +2,7 @@
   "name": "company-jobsway",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://jobsway-company.herokuapp.com/api/v1/company/",
+  "proxy": "http://localhost:4000/api/v1/company/",
   "dependencies": {
     "@craco/craco": "^6.4.0",
     "@material-tailwind/react": "0.3.4",

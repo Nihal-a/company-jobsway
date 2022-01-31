@@ -60,7 +60,7 @@ export const AssignTaskToUser = () => {
 
     return useMutation(assignTasktoUser , {
         onSuccess : ({data}) => {
-            history.push('/shortlist')
+            queryClient.invalidateQueries(['shortListedUsers'])
             toast.success(data.msg)
             swal.close()
         },
