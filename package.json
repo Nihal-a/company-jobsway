@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:4000/api/v1/company/",
+  "homepage": "http://company.jobsway.online/",
   "dependencies": {
     "@craco/craco": "^6.4.0",
     "@material-tailwind/react": "0.3.4",
@@ -32,7 +33,9 @@
     "start": "PORT=3002 craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
