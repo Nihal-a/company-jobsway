@@ -7,7 +7,7 @@ const UnverifiedCompany = () => {
 
     const history = useHistory()
 
-    const handleLogin =  async(e) => {
+    const handleLogin =  async (e) => {
         e.preventDefault()
         await localStorage.removeItem('company')
         history.push('/')
