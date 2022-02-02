@@ -6,6 +6,7 @@ import { RegisterCompany } from "../../Hooks/Auth";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Logo from "../UI/Logo/Logo";
 import ImageInput from "../UI/ImageInput/ImageInput";
+import FormError from "../UI/Error/FormError";
 
 const initialState = {
   companyName: "",
@@ -29,6 +30,7 @@ const Register = () => {
   const [formData, setformData] = useState(initialState);
   const [formErr, setFormErr] = useState(null);
   const { mutate: registerCompany, isLoading } = RegisterCompany();
+  const [ErrArr, setErrArr] = useState(null);
   const history = useHistory();
   const location = useLocation()
 
@@ -40,11 +42,18 @@ const Register = () => {
 
   useEffect(() => {
     setImage(null)
+    if(location?.state?.Err){
+      const errorsArray = location?.state?.Err
+      setErrArr(...errorsArray)
+    }
   }, [location])
 
 useEffect(() => {
   location.state = undefined
 }, [formData])
+
+
+
 
   if (isLoading || loading) {
     return (
@@ -56,6 +65,7 @@ useEffect(() => {
     e.preventDefault();
     registerCompany({ companyDetails : formData , image});
   };
+
 
 
   return (
@@ -85,7 +95,6 @@ useEffect(() => {
             </p>
             <div className="mt-3 flex justify-between w-full ">
               <input
-                
                 onChange={handleChange}
                 name="companyName"
                 type="text"
