@@ -2,7 +2,7 @@
   "name": "company-jobsway",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4000/api/v1/company/",
+  "proxy": "https://company.jobsway.online/api/v1/company/",
   "homepage": "http://company.jobsway.online/",
   "dependencies": {
     "@craco/craco": "^6.4.0",
