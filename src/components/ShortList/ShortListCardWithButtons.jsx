@@ -40,6 +40,10 @@ const ShortListCardWithButtons = ({user}) => {
 
       }, [formData]);
 
+
+      if(loading){
+          return <LoadingSpinner />
+      }
       
 
       const handleChange = (e) => {
