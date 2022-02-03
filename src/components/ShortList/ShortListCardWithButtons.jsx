@@ -20,7 +20,7 @@ const ShortListCardWithButtons = ({user}) => {
      });
      const [time, setTime] = useState(5);
      const [selected, setSelected] = useState(null);
-     
+     const [showModal, setShowModal] = useState(false);
      const [hr, setHr] = useState(
         JSON.parse(localStorage.getItem("hrData"))
      );
@@ -100,7 +100,7 @@ const ShortListCardWithButtons = ({user}) => {
     }
 
 
-    const [showModal, setShowModal] = useState(false);
+    
 
 
     const handleAssignTask = (e) => {
