@@ -1,11 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React , { useState , useEffect } from 'react'
 import AppCard from '../Applications/AppCard'
-import swal from '@sweetalert/with-react'
-import { useEffect, useState } from 'react/cjs/react.development'
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 import { useHrTasks } from '../../Hooks/hr'
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from '@material-tailwind/react'
+import { Modal, ModalBody , ModalHeader } from '@material-tailwind/react'
 import { AssignTaskToUser } from '../../Hooks/user'
 
 
