@@ -9,15 +9,17 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from '@material-ta
 import { AssignTaskToUser } from '../../Hooks/user'
 
 
+const initialState = { 
+    q1 : '' ,
+    q2 : '' ,
+    q3 : '' ,
+    q4 : '' ,
+ }
+
 const ShortListCardWithButtons = ({user}) => {
 
 
-    const [formData, setformData] = useState({ 
-        q1 : '' ,
-        q2 : '' ,
-        q3 : '' ,
-        q4 : '' ,
-     });
+    const [formData, setformData] = useState(initialState);
      const [time, setTime] = useState(5);
      const [selected, setSelected] = useState(null);
      const [showModal, setShowModal] = useState(false);

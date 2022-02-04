@@ -19,6 +19,8 @@ function Shortlist() {
 
   const { data : shortListedUsers , isLoading } = useShortlistedUsers(hr?.hrDetails?._id)
 
+  console.log(shortListedUsers);
+
   if(isLoading) {
     return <LoadingSpinner />
   }
