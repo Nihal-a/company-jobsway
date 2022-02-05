@@ -6,6 +6,10 @@ import { RegisterCompany } from "../../Hooks/Auth";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Logo from "../UI/Logo/Logo";
 import ImageInput from "../UI/ImageInput/ImageInput";
+import { useForm } from "react-hook-form";
+import FormError from "../UI/Error/FormError";
+
+
 
 const initialState = {
   companyName: "",
@@ -32,6 +36,8 @@ const Register = () => {
   const [ErrArr, setErrArr] = useState(null);
   const history = useHistory();
   const location = useLocation()
+  const { register, formState: { errors }, handleSubmit: validateSubmit } = useForm();
+
 
 
   const handleChange = (e) => {
@@ -60,8 +66,7 @@ useEffect(() => {
     );
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     registerCompany({ companyDetails : formData , image});
   };
 
@@ -84,7 +89,7 @@ useEffect(() => {
           <form
             action=""
             className="flex flex-col items-start"
-            onSubmit={handleSubmit}
+            onSubmit={validateSubmit(handleSubmit)}
             method="POST"
             encType="multipart/form-data"
           >
@@ -92,55 +97,72 @@ useEffect(() => {
             <p className="font-light text-secondary text-sm">
               Enter the details of company
             </p>
-            <div className="mt-3 flex justify-between w-full ">
-              <input
+            <div className="mt-3 flex justify-between w-full gap-2">
+              <div className="w-full">
+                <input
                 onChange={handleChange}
                 name="companyName"
                 type="text"
                 placeholder="Company Name"
-                className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                className="text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                { ...register ("companyName" , { required : true }) }
               />
-              
-              <input
-                
+             {errors.companyName && <FormError text={"This Field Is Required"} />}
+              </div>
+
+              <div className="w-full">
+                <input
                 onChange={handleChange}
                 name="industry"
                 type="text"
                 placeholder="Indutsry"
-                className="ml-0.5  text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                className="text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                { ...register ("industry" , { required : true }) }
               />
+              {errors.industry && <FormError text={"This Field Is Required"} />}
+              </div>
             </div>
             <input
-              
               onChange={handleChange}
               name="email"
               type="email"
               placeholder="Email"
               className="mt-3 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+              {...register("email", { required : true   , pattern : { value :  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } })}
             />
-            <div className="mt-3 flex justify-between w-full ">
-              <input
-                
+              {errors.email && <FormError text={"Enter a valid email address"} />}
+            <div className="mt-3 flex justify-between w-full gap-2">
+              <div className="w-full ">
+                <input
                 onChange={handleChange}
                 name="location"
                 type="text"
                 placeholder="Location"
-                className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                className=" text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                { ...register ("location" , { required : true }) }
               />
-              <input
+              {errors.location && <FormError text={"This Field Is Required"}/>}
+              </div>
+              <div className="w-full ">
+                <input
+                {...register("phone", { required:  true  , minLength:10 , maxLength:10 , pattern : { value : /^[0-9]{10}$/ }})}
                 onChange={handleChange}
                 name="phone"
                 type="tel"
                 placeholder="Phone"
-                className="ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+                className=" text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />
+              {errors.phone && <FormError text={"Enter a valid phone number"}/>}
+              </div>
             </div>
             <textarea
               onChange={handleChange}
               name="bio"
               placeholder="About your Company (Must be more than 20 words long)"
               className="text-sm font-light bg-secondary w-full mt-3 rounded-md h-40 border-none outline-none p-3 "
+              { ...register ("bio" , { required : true  , minLength:70}) }
             />
+            {errors.bio && <FormError  text={"Bio must be minimum 20 words"} /> }
             <div className="w-full h-40 flex items-center flex-col">
 
               <div className="w-full h-40 flex items-center flex-col mt-8">
@@ -228,7 +250,9 @@ useEffect(() => {
               type="password"
               placeholder="Password"
               className="mt-1 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+              {...register ("password" , { required : true , minLength:8 })}
             />
+            {errors.password && <FormError text={"Password must be minimum 8 charecters"} /> }
             <input
               
               onChange={handleChange}
@@ -236,7 +260,9 @@ useEffect(() => {
               type="Password"
               placeholder="Confirm Password"
               className="mt-2 ml-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
+              {...register ("confirmPassword" , { required : true , minLength:8 })}
             />
+            {errors.confirmPassword && <FormError text={"Password must be minimum 8 charecters"} /> }
 
             {/* {formErr && (
               <p className="font-md mt-1" style={{ color: "red" }}>
