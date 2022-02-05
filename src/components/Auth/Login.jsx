@@ -39,8 +39,7 @@ function Login() {
     }
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = () => {
         if(hrAccount){
             hrLogin(formData)
         }else{
