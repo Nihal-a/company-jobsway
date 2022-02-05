@@ -6,7 +6,6 @@ import { RegisterCompany } from "../../Hooks/Auth";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import Logo from "../UI/Logo/Logo";
 import ImageInput from "../UI/ImageInput/ImageInput";
-import FormError from "../UI/Error/FormError";
 
 const initialState = {
   companyName: "",
@@ -101,6 +100,7 @@ useEffect(() => {
                 placeholder="Company Name"
                 className="mr-0.5 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary"
               />
+              
               <input
                 
                 onChange={handleChange}

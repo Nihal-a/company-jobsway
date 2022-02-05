@@ -5,6 +5,7 @@ import { LoginCompany } from '../../Hooks/Auth'
 import { LoginHrAccount } from '../../Hooks/hr'
 import LoadingSpinner from '../UI/LoadingSpinner/LoadingSpinner'
 import { useForm } from "react-hook-form";
+import FormError from '../UI/Error/FormError'
 const initialState = { email: '', password: '' }
 
 
@@ -66,9 +67,9 @@ function Login() {
                 </div>
                 {loginErr && <p className="text-sm font-light mt-1" style={{color:'red'}}>{loginErr}</p> }
                 <input {...register("email", { required : true   , pattern : { value :  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } })}   onChange={handleChange} name="email" type="email" placeholder="Email" className="m-1 mt-8 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
-                {errors.email && <p className="text-danger text-xs text-left m-1 w-full font-light">Enter a Valid Email Address</p>}
+                {errors.email && <FormError className="text-danger text-xs text-left m-1 w-full font-light" text={"Enter a Valid Email Addres"} />}
                 <input {...register("password", { required: true , minLength:8  })}  onChange={handleChange} name="password" type="password" placeholder="Password" className="m-1 text-sm w-full h-14 rounded-md font-light border-none outline-none p-3 bg-secondary" />
-                {errors.password && <p className="text-danger text-xs text-left m-1 w-full font-light">Password Must be 8 Charecter or more.</p>}
+                {errors.password && <FormError className="text-danger text-xs text-left m-1 w-full font-light" text={"Password Must be 8 Charecter or more."} />}
                 <button type="submit" className="text-white text-lg bg-primary px-7 py-1 m-3 rounded-lg font-medium" style={{ color: '#fff' }}>Sign In</button>
             </form>
             <p className="mt-4 text-sm font-light">
