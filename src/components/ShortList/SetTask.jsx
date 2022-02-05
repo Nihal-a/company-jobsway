@@ -61,24 +61,24 @@ const SetTask = () => {
       const handleSubmit = (e) => {
           e.preventDefault()
               var set1 = {
-                 q1 : formData.set1a,
-                 q2 : formData.set1b,
-                 q3 : formData.set1c,
-                 q4 : formData.set1d,
+                 q1 : formData.set1a || '',
+                 q2 : formData.set1b || '',
+                 q3 : formData.set1c || '',
+                 q4 : formData.set1d || '',
               }
 
               var set2 = {
-                 q1 : formData.set2a,
-                 q2 : formData.set2b,
-                 q3 : formData.set2c,
-                 q4 : formData.set2d,
+                 q1 : formData.set2a || '',
+                 q2 : formData.set2b || '',
+                 q3 : formData.set2c || '',
+                 q4 : formData.set2d || '',
               }
 
               var set3 = {
-                 q1 : formData.set3a,
-                 q2 : formData.set3b,
-                 q3 : formData.set3c,
-                 q4 : formData.set3d,
+                 q1 : formData.set3a || '',
+                 q2 : formData.set3b || '',
+                 q3 : formData.set3c || '',
+                 q4 : formData.set3d || '',
               }
               const data = { set1 , set2 , set3 }
               const hrId = hr?.hrDetails?._id

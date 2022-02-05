@@ -131,9 +131,9 @@ const ShortListCardWithButtons = ({user}) => {
                     </div>
                     <div className="flex flex-col w-full">
                         <input value={formData.q1} onChange={handleChange} required name='set3a'  placeholder='Question 1' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
-                        <input value={formData.q2} onChange={handleChange} required name='set3b'  placeholder='Question 2' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
-                        <input value={formData.q3} onChange={handleChange} required name='set3c'  placeholder='Question 3' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
-                        <input value={formData.q4} onChange={handleChange} required name='set3d'  placeholder='Question 4' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
+                        <input value={formData.q2} onChange={handleChange}  name='set3b'  placeholder='Question 2' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
+                        <input value={formData.q3} onChange={handleChange}  name='set3c'  placeholder='Question 3' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
+                        <input value={formData.q4} onChange={handleChange}  name='set3d'  placeholder='Question 4' type="text" className='m-1 text-sm h-14 rounded-md font-light border-none outline-none p-3 bg-secondary w-96'/>
                     </div>
                         <div className="w-full flex flex-col items-center">
                         <div className="w-full mt-3 flex flex-col items-center ">
