@@ -49,7 +49,6 @@ function JobsCard({job}) {
             </div>
             <div className="flex justify-between mt-2 ml-2">
                 <p className="text-white">{job.minExp} - {job.maxExp} year of Experience</p>
-                <Link className="text-white underline text-md">See Applications</Link>
             </div>
         </div>
     )
