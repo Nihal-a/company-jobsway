@@ -79,7 +79,7 @@ const onConfirmPasswordChange = (e) => {
   const handleSubmit = () => {
     console.log(formData);
     if(formErr) return formErr(true)
-    // registerCompany({ companyDetails : formData , image});
+    registerCompany({ companyDetails : formData , image});
   };
 
 
